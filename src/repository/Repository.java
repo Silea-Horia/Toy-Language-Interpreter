@@ -15,11 +15,9 @@ import model.type.IntType;
 import model.value.BoolValue;
 import model.value.IValue;
 import model.value.IntValue;
+import model.value.StringValue;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +85,6 @@ public class Repository implements IRepository {
                 initialStatementList = this.generateState3();
 
         }
-        this.stateList.add(new PrgState(new MyStack<IStmt>(), new MyDictionary<String, IValue>(), new MyList<IValue>(), initialStatementList));
+        this.stateList.add(new PrgState(new MyStack<IStmt>(), new MyDictionary<String, IValue>(), new MyList<IValue>(), initialStatementList, new MyDictionary<StringValue, BufferedReader>()));
     }
 }

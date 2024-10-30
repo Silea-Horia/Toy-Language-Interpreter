@@ -25,6 +25,10 @@ public class Controller {
         this.displayFlag = displayFlag;
     }
 
+    public boolean getDisplayFlag() {
+        return this.displayFlag;
+    }
+
     public void generateInitialState(int option) {
         this.repository.setState(option);
     }
@@ -40,7 +44,7 @@ public class Controller {
     }
 
     public void allStep() {
-        PrgState prgState = repository.getCrtState();
+        PrgState prgState = this.repository.getCrtState();
         if (this.displayFlag) System.out.println(prgState);
         while (!prgState.getExeStack().isEmpty()) {
             oneStep(prgState);

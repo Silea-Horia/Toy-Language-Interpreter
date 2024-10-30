@@ -9,9 +9,9 @@ import model.value.IntValue;
 public class ArithExp implements IExp {
     private IExp e1;
     private IExp e2;
-    private int op; // 1 - addition, 2 - subtraction, 3 - multiplication, 4 - division
+    private char op; // 1 - addition, 2 - subtraction, 3 - multiplication, 4 - division
 
-    public ArithExp(IExp e1, IExp e2, int op) {
+    public ArithExp(IExp e1, IExp e2, char op) {
         this.e1 = e1;
         this.e2 = e2;
         this.op = op;
@@ -27,13 +27,13 @@ public class ArithExp implements IExp {
                 int n1 = ((IntValue)v1).getVal();
                 int n2 = ((IntValue)v2).getVal();
                 switch (this.op) {
-                    case 1:
+                    case '+':
                         return new IntValue(n1 + n2);
-                    case 2:
+                    case '-':
                         return new IntValue(n1 - n2);
-                    case 3:
+                    case '*':
                         return new IntValue(n1 * n2);
-                    case 4:
+                    case '/':
                         if (n2 == 0) throw new ExpressionException("Division by zero!\n");
                         else return new IntValue(n1 / n2);
                 }
@@ -45,5 +45,19 @@ public class ArithExp implements IExp {
     @Override
     public IExp deepCopy() {
         return new ArithExp(this.e1.deepCopy(), this.e2.deepCopy(), this.op);
+    }
+
+    @Override
+    public String toString() {
+        switch (this.op) {
+            case '+':
+                return this.e1 + "+" + this.e2;
+            case '-':
+                return this.e1 + "-" + this.e2;
+            case '*':
+                return this.e1 + "*" + this.e2;
+            default:
+                return this.e1 + "/" + this.e2;
+        }
     }
 }

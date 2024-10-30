@@ -20,7 +20,7 @@ public class AssignStmt implements IStmt {
 
     @Override
     public String toString() {
-        return id + "=" + exp;
+        return this.id + "=" + this.exp;
     }
 
     @Override

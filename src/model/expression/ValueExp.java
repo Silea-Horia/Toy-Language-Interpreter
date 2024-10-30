@@ -16,4 +16,9 @@ public class ValueExp implements IExp{
     public IExp deepCopy() {
         return new ValueExp(this.e);
     }
+
+    @Override
+    public String toString() {
+        return this.e.toString();
+    }
 }

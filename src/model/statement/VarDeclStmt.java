@@ -17,7 +17,7 @@ public class VarDeclStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "Declare variable with type" + this.type + ", id='" + this.id;
+        return "Declare variable with type: " + this.type + ", id=" + this.id;
     }
 
     @Override

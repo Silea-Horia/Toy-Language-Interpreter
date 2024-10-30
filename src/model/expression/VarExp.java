@@ -23,4 +23,9 @@ public class VarExp implements IExp {
     public IExp deepCopy() {
         return new VarExp(this.id);
     }
+
+    @Override
+    public String toString() {
+        return this.id;
+    }
 }

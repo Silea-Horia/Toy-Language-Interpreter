@@ -1,6 +1,5 @@
 package repository;
 
-import model.adt.IMyStack;
 import model.adt.MyDictionary;
 import model.adt.MyList;
 import model.adt.MyStack;
@@ -76,16 +75,22 @@ public class Repository implements IRepository {
 
     @Override
     public void setState(int option) {
-        IStmt initialStatementList = this.generateState1();
+        IStmt initialStatementList;
         switch (option){
             case 1:
                 initialStatementList = this.generateState1();
+                break;
             case 2:
                 initialStatementList = this.generateState2();
+                break;
             case 3:
                 initialStatementList = this.generateState3();
+                break;
+            default:
+                initialStatementList = new NopStmt();
 
         }
+        this.stateList.clear();
         this.stateList.add(new PrgState(new MyStack<IStmt>(), new MyDictionary<String, IValue>(), new MyList<IValue>(), initialStatementList, new MyDictionary<StringValue, BufferedReader>()));
     }
 }

@@ -21,6 +21,14 @@ public class Controller {
         this.displayFlag = displayFlag;
     }
 
+    public void setDisplayFlag(boolean displayFlag) {
+        this.displayFlag = displayFlag;
+    }
+
+    public void generateInitialState(int option) {
+        this.repository.setState(option);
+    }
+
     public PrgState oneStep(PrgState prgState) throws ControllerException {
         IMyStack<IStmt> stack = prgState.getExeStack();
         try {

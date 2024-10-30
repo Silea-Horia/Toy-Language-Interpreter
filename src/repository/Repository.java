@@ -74,6 +74,7 @@ public class Repository implements IRepository {
                                         IntValue(2))), new AssignStmt("v", new ValueExp(new IntValue(3)))), new PrintStmt(new VarExp("v"))))));
     }
 
+    @Override
     public void setState(int option) {
         IStmt initialStatementList = this.generateState1();
         switch (option){

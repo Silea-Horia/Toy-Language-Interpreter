@@ -7,4 +7,5 @@ public interface IRepository {
     PrgState getCrtState();
     void addPrgState(PrgState state);
     void logPrgState() throws RepoException;
+    void setState(int option);
 }

@@ -1,6 +1,6 @@
 package model.exception;
 
-public class ControllerException extends RuntimeException {
+public class ControllerException extends CompilerException {
     public ControllerException(String message) {
         super(message);
     }

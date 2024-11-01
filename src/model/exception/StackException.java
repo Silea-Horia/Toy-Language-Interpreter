@@ -1,6 +1,6 @@
 package model.exception;
 
-public class StackException extends Exception{
+public class StackException extends CompilerException {
     public StackException(String message) {
         super(message);
     }

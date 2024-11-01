@@ -1,6 +1,6 @@
 package model.exception;
 
-public class ExpressionException extends RuntimeException {
+public class ExpressionException extends CompilerException {
     public ExpressionException(String message) {
         super(message);
     }

@@ -2,12 +2,13 @@ package model.adt;
 
 import model.exception.StackException;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class MyStack<T> implements IMyStack<T> {
-    private Stack<T> stack;
+    private Deque<T> stack;
 
-    public MyStack() { this.stack = new Stack<T>(); }
+    public MyStack() { this.stack = new ArrayDeque<T>(); }
 
     @Override
     public void push(T t) {
@@ -34,8 +35,8 @@ public class MyStack<T> implements IMyStack<T> {
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.stack.forEach((t) -> {
-            str.append(t).append(" ");
+            str.append(t).append("\n");
         });
-        return "Stack is: " + str + "\n";
+        return "Stack is:\n" + str;
     }
 }

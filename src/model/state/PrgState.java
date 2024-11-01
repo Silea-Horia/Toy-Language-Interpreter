@@ -59,7 +59,7 @@ public class PrgState {
 
     @Override
     public String toString() {
-        return "PrgState is:\n" + this.exeStack + this.symTable + this.out + "\n";
+        return "PrgState is:\n\n" + this.exeStack + "\n" + this.symTable + "\n" + this.out + "\n";
     }
 
     public String toStringFile() {

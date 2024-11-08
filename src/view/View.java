@@ -3,7 +3,6 @@ package view;
 import controller.Controller;
 import model.exception.ControllerException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class View {

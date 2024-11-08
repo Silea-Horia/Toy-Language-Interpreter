@@ -24,8 +24,8 @@ public class ArithExp implements IExp {
         if (v1.getType().equals(new IntType())) {
             v2 = this.e2.eval(tbl);
             if (v2.getType().equals(new IntType())) {
-                int n1 = ((IntValue)v1).getVal();
-                int n2 = ((IntValue)v2).getVal();
+                int n1 = ((IntValue)v1).getValue();
+                int n2 = ((IntValue)v2).getValue();
                 switch (this.op) {
                     case '+':
                         return new IntValue(n1 + n2);

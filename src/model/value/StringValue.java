@@ -21,7 +21,8 @@ public class StringValue implements IValue {
         return this.value;
     }
 
+    @Override
     public boolean equals(Object other) {
-        return other instanceof StringValue && Objects.equals(this.value, ((StringValue) other).value);
+        return other instanceof StringValue && Objects.equals(this.value, ((StringValue) other).getValue());
     }
 }

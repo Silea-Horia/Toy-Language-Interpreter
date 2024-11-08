@@ -35,7 +35,7 @@ public class IfStmt implements IStmt {
             throw new StmtException(e.getMessage());
         }
         if (!cond.getType().equals(new BoolType())) throw new StmtException("Conditional expression is not a boolean!|n");
-        if (((BoolValue)cond).getVal()) stack.push(this.thenS);
+        if (((BoolValue)cond).getValue()) stack.push(this.thenS);
         else stack.push(this.elseS);
         return state;
     }

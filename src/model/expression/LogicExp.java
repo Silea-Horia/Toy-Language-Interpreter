@@ -24,8 +24,8 @@ public class LogicExp implements IExp{
         if (v1.getType().equals(new BoolType())) {
             v2 = this.e2.eval(tbl);
             if (v2.getType().equals(new BoolType())) {
-                if (this.op == 1) return new BoolValue(((BoolValue)v1).getVal() && ((BoolValue)v2).getVal());
-                else return new BoolValue(((BoolValue)v1).getVal() || ((BoolValue)v2).getVal()  );
+                if (this.op == 1) return new BoolValue(((BoolValue)v1).getValue() && ((BoolValue)v2).getValue());
+                else return new BoolValue(((BoolValue)v1).getValue() || ((BoolValue)v2).getValue()  );
             } else throw new ExpressionException("Second operand is not boolean!\n");
         }
         throw new ExpressionException("First operand is not boolean!\n");

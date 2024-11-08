@@ -22,8 +22,8 @@ public class MyList<T> implements IMyList<T> {
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.list.forEach((t) -> {
-            str.append(t).append(" ");
+            str.append(t).append("\n");
         });
-        return "List is: [ " + str + "\b]\n";
+        return "Out:\n" + str + "\n";
     }
 }

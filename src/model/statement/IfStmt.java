@@ -1,6 +1,7 @@
 package model.statement;
 
 import model.adt.IMyStack;
+import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
@@ -27,7 +28,12 @@ public class IfStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws StmtException {
         IMyStack<IStmt> stack = state.getExeStack();
-        IValue cond = this.exp.eval(state.getSymTable());
+        IValue cond = null;
+        try {
+            cond = this.exp.eval(state.getSymTable());
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
         if (!cond.getType().equals(new BoolType())) throw new StmtException("Conditional expression is not a boolean!|n");
         if (((BoolValue)cond).getVal()) stack.push(this.thenS);
         else stack.push(this.elseS);

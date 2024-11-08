@@ -14,7 +14,7 @@ public class PrgState {
     private IMyDictionary<String, IValue> symTable;
     private IMyList<IValue> out;
     private IStmt originalProgram;
-    private IMyDictionary<StringValue, BufferedReader> fileTable;
+    private IMyDictionary<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
 
     public PrgState(IMyStack<IStmt> exeStack, IMyDictionary<String, IValue> symTable, IMyList<IValue> out, IStmt originalProgram, IMyDictionary<StringValue, BufferedReader> fileTable) {
         this.exeStack = exeStack;
@@ -37,29 +37,14 @@ public class PrgState {
         return symTable;
     }
 
-    public void setExeStack(IMyStack<IStmt> exeStack) {
-        this.exeStack = exeStack;
-    }
-
-    public void setSymTable(IMyDictionary<String, IValue> symTable) {
-        this.symTable = symTable;
-    }
-
-    public void setOut(IMyList<IValue> out) {
-        this.out = out;
-    }
-
-    public void setOriginalProgram(IStmt originalProgram) {
-        this.originalProgram = originalProgram;
-    }
-
     public IMyDictionary<StringValue, BufferedReader> getFileTable() {
         return fileTable;
     }
 
     @Override
     public String toString() {
-        return "PrgState is:\n\n" + this.exeStack + "\n" + this.symTable + "\n" + this.out + "\n";
+        return "PrgState is:\n" + this.exeStack + this.symTable + this.out;
+        // TODO ADD THE FILE TABLE AT THE END
     }
 
     public String toStringFile() {

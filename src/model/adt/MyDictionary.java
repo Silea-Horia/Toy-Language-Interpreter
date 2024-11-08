@@ -44,6 +44,6 @@ public class MyDictionary<K, V> implements IMyDictionary<K, V>{
         this.map.forEach((k, v) -> {
             str.append(k).append("->").append(v).append("\n");
         });
-        return "Dictionary is:\n" + str;
+        return "SymTable:\n" + str;
     }
 }

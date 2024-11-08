@@ -1,6 +1,7 @@
 package model.statement;
 
 import model.exception.DictionaryException;
+import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
@@ -32,10 +33,15 @@ public class ReadFileStmt implements IStmt {
         } catch (DictionaryException de) {
             throw new StmtException(de.getMessage());
         }
-        IValue result = this.exp.eval(state.getSymTable());
+        IValue result = null;
+        try {
+            result = this.exp.eval(state.getSymTable());
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
         if (!result.getType().equals(new StringType())) throw new StmtException("The evaluated expression is not a string type!\n");
         try {
-            BufferedReader reader = state.getFileTable().lookup((StringValue) result);
+            BufferedReader reader = state.getFileTable().lookup((StringValue)result);
             try {
                 String fileLine = reader.readLine();
                 if (fileLine == null)

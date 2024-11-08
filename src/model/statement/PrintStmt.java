@@ -1,6 +1,7 @@
 package model.statement;
 
 import model.adt.IMyList;
+import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
@@ -16,7 +17,11 @@ public class PrintStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws StmtException {
         IMyList<IValue> list = state.getOut();
-        list.add(this.exp.eval(state.getSymTable()));
+        try {
+            list.add(this.exp.eval(state.getSymTable()));
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
         return state;
     }
 

@@ -2,7 +2,9 @@ package controller;
 
 import model.adt.IMyStack;
 import model.exception.ControllerException;
+import model.exception.RepoException;
 import model.exception.StackException;
+import model.exception.StmtException;
 import model.state.PrgState;
 import model.statement.IStmt;
 import repository.IRepository;
@@ -13,7 +15,7 @@ public class Controller {
 
     public Controller(IRepository repository) {
         this.repository = repository;
-        this.displayFlag = false;
+        this.displayFlag = true;
     }
 
     public Controller(IRepository repository, boolean displayFlag) {
@@ -37,18 +39,42 @@ public class Controller {
         IMyStack<IStmt> stack = prgState.getExeStack();
         try {
             IStmt crtStmt = stack.pop();
-            return crtStmt.execute(prgState);
+            try {
+                return crtStmt.execute(prgState);
+            } catch (StmtException e) {
+                throw new ControllerException(e.getMessage());
+            }
         } catch (StackException e) {
             throw new ControllerException("Execution stack is empty!\n");
         }
     }
 
-    public void allStep() {
+    public void allStep() throws ControllerException {
         PrgState prgState = this.repository.getCrtState();
-        if (this.displayFlag) System.out.println(prgState);
+        if (this.displayFlag) {
+            System.out.println(prgState);
+            // TODO
+            /*
+            try {
+                this.repository.logPrgState();
+            } catch (RepoException re) {
+                throw new ControllerException(re.getMessage());
+            }
+            */
+        }
         while (!prgState.getExeStack().isEmpty()) {
             oneStep(prgState);
-            if (this.displayFlag) System.out.println(prgState);
+            if (this.displayFlag) {
+                System.out.println(prgState);
+                // TODO
+                /*
+                try {
+                    this.repository.logPrgState();
+                } catch (RepoException re) {
+                    throw new ControllerException(re.getMessage());
+                }
+                */
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package model.statement;
 import model.adt.IMyDictionary;
 import model.adt.IMyStack;
 import model.exception.DictionaryException;
+import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
@@ -29,7 +30,12 @@ public class AssignStmt implements IStmt {
         IMyDictionary<String, IValue> tbl = state.getSymTable();
         IType typeId;
         if (tbl.contains(this.id)) {
-            IValue val = this.exp.eval(tbl);
+            IValue val = null;
+            try {
+                val = this.exp.eval(tbl);
+            } catch (ExpressionException e) {
+                throw new StmtException(e.getMessage());
+            }
             try {
                 typeId = (tbl.lookup(this.id)).getType();
                 if (val.getType().equals(typeId)) {

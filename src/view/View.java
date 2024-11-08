@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import model.exception.ControllerException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -32,7 +33,11 @@ public class View {
             switch (opt) {
                 case 1:
                     getSetOption();
-                    controller.allStep();
+                    try {
+                        controller.allStep();
+                    } catch (ControllerException e) {
+                        System.out.println(e.getMessage());
+                    }
                     continue;
                 case 2:
                     this.controller.setDisplayFlag(!this.controller.getDisplayFlag());

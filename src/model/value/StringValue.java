@@ -25,4 +25,9 @@ public class StringValue implements IValue {
     public boolean equals(Object other) {
         return other instanceof StringValue && Objects.equals(this.value, ((StringValue) other).getValue());
     }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

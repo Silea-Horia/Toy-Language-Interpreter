@@ -12,10 +12,10 @@ import model.value.StringValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class closeRFile implements IStmt {
+public class CloseRFile implements IStmt {
     private IExp exp;
 
-    public closeRFile(IExp exp) {
+    public CloseRFile(IExp exp) {
         this.exp = exp;
     }
 
@@ -40,6 +40,11 @@ public class closeRFile implements IStmt {
 
     @Override
     public IStmt deepCopy() {
-        return new closeRFile(this.exp.deepCopy());
+        return new CloseRFile(this.exp.deepCopy());
+    }
+
+    @Override
+    public String toString() {
+        return "Close file: " + this.exp;
     }
 }

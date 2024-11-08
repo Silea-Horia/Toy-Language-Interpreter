@@ -15,11 +15,11 @@ import model.value.StringValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class readFile implements IStmt {
+public class ReadFile implements IStmt {
     private IExp exp;
     String varName;
 
-    public readFile(IExp exp, String varName) {
+    public ReadFile(IExp exp, String varName) {
         this.exp = exp;
         this.varName = varName;
     }
@@ -43,7 +43,8 @@ public class readFile implements IStmt {
                 throw new StmtException("Expression result isn't type string");
             }
 
-            try (BufferedReader br = state.getFileTable().lookup((StringValue) eval)) {
+            try {
+                BufferedReader br = state.getFileTable().lookup((StringValue) eval);
                 String readVal = br.readLine();
                 IntValue newValue;
                 if (readVal == null) {
@@ -53,14 +54,21 @@ public class readFile implements IStmt {
                 }
                 symTable.insert(this.varName, newValue);
                 return state;
+            } catch (IOException e) {
+                throw new StmtException(e.getMessage());
             }
-        } catch (DictionaryException | ExpressionException | IOException e) {
+        } catch (DictionaryException | ExpressionException e) {
             throw new StmtException(e.getMessage());
         }
     }
 
     @Override
     public IStmt deepCopy() {
-        return new readFile(this.exp.deepCopy(), this.varName);
+        return new ReadFile(this.exp.deepCopy(), this.varName);
+    }
+
+    @Override
+    public String toString() {
+        return "Read from file: " + this.exp;
     }
 }

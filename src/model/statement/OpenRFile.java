@@ -12,10 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class openRFile implements IStmt {
+public class OpenRFile implements IStmt {
     private IExp exp;
 
-    public openRFile(IExp exp) {
+    public OpenRFile(IExp exp) {
         this.exp = exp;
     }
 
@@ -50,6 +50,11 @@ public class openRFile implements IStmt {
 
     @Override
     public IStmt deepCopy() {
-        return new openRFile(exp.deepCopy());
+        return new OpenRFile(exp.deepCopy());
+    }
+
+    @Override
+    public String toString() {
+        return "Open file: " + this.exp;
     }
 }

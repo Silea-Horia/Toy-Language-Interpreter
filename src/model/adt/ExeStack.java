@@ -5,10 +5,10 @@ import model.exception.StackException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class MyStack<T> implements IMyStack<T> {
+public class ExeStack<T> implements IStack<T> {
     private Deque<T> stack;
 
-    public MyStack() { this.stack = new ArrayDeque<T>(); }
+    public ExeStack() { this.stack = new ArrayDeque<T>(); }
 
     @Override
     public void push(T t) {
@@ -17,7 +17,7 @@ public class MyStack<T> implements IMyStack<T> {
 
     @Override
     public T pop() throws StackException {
-        if (this.stack.isEmpty()) throw new StackException("Stack is empty!\n");
+        if (this.stack.isEmpty()) throw new StackException("ExeStack is empty!\n");
         return this.stack.pop();
     }
 

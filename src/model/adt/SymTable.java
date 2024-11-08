@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class MyDictionary<K, V> implements IMyDictionary<K, V>{
+public class SymTable<K, V> implements IDictionary<K, V> {
     private Map<K, V> map;
 
-    public MyDictionary() { this.map = new HashMap<K, V>(); }
+    public SymTable() { this.map = new HashMap<K, V>(); }
 
     @Override
     public void insert(K k, V v) {

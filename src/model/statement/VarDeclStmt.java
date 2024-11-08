@@ -1,6 +1,6 @@
 package model.statement;
 
-import model.adt.IMyDictionary;
+import model.adt.IDictionary;
 import model.exception.StmtException;
 import model.state.PrgState;
 import model.type.IType;
@@ -22,7 +22,7 @@ public class VarDeclStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws StmtException {
-        IMyDictionary<String, IValue> tbl = state.getSymTable();
+        IDictionary<String, IValue> tbl = state.getSymTable();
         if (tbl.contains(this.id)) throw new StmtException("Variable is already declared!\n");
         tbl.insert(this.id, this.type.getDefaultValue());
         return state;

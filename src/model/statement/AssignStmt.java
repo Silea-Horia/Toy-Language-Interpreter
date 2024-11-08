@@ -1,7 +1,7 @@
 package model.statement;
 
-import model.adt.IMyDictionary;
-import model.adt.IMyStack;
+import model.adt.IDictionary;
+import model.adt.IStack;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
@@ -26,8 +26,8 @@ public class AssignStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws StmtException {
-        IMyStack<IStmt> stack = state.getExeStack();
-        IMyDictionary<String, IValue> tbl = state.getSymTable();
+        IStack<IStmt> stack = state.getExeStack();
+        IDictionary<String, IValue> tbl = state.getSymTable();
         IType typeId;
         if (tbl.contains(this.id)) {
             IValue val = null;

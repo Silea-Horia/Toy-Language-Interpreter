@@ -1,8 +1,8 @@
 package repository;
 
-import model.adt.MyDictionary;
-import model.adt.MyList;
-import model.adt.MyStack;
+import model.adt.SymTable;
+import model.adt.Out;
+import model.adt.ExeStack;
 import model.exception.RepoException;
 import model.expression.ArithExp;
 import model.expression.ValueExp;
@@ -18,10 +18,9 @@ import model.value.StringValue;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Repository implements IRepository {
-    private List<PrgState> stateList;
+    private java.util.List<PrgState> stateList;
     private String logFilePath;
     private int  currentProgramState;
 
@@ -91,6 +90,6 @@ public class Repository implements IRepository {
 
         }
         this.stateList.clear();
-        this.stateList.add(new PrgState(new MyStack<IStmt>(), new MyDictionary<String, IValue>(), new MyList<IValue>(), initialStatementList, new MyDictionary<StringValue, BufferedReader>()));
+        this.stateList.add(new PrgState(new ExeStack<IStmt>(), new SymTable<String, IValue>(), new Out<IValue>(), initialStatementList, new SymTable<StringValue, BufferedReader>()));
     }
 }

@@ -1,6 +1,6 @@
 package model.expression;
 
-import model.adt.IMyDictionary;
+import model.adt.IDictionary;
 import model.exception.ExpressionException;
 import model.type.BoolType;
 import model.value.BoolValue;
@@ -18,7 +18,7 @@ public class LogicExp implements IExp{
     }
 
     @Override
-    public IValue eval(IMyDictionary<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(IDictionary<String, IValue> tbl) throws ExpressionException {
         IValue v1, v2;
         v1 = this.e1.eval(tbl);
         if (v1.getType().equals(new BoolType())) {

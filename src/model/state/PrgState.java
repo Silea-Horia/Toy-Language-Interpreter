@@ -1,8 +1,8 @@
 package model.state;
 
-import model.adt.IMyDictionary;
-import model.adt.IMyList;
-import model.adt.IMyStack;
+import model.adt.IDictionary;
+import model.adt.IList;
+import model.adt.IStack;
 import model.statement.IStmt;
 import model.value.IValue;
 import model.value.StringValue;
@@ -10,13 +10,13 @@ import model.value.StringValue;
 import java.io.BufferedReader;
 
 public class PrgState {
-    private IMyStack<IStmt> exeStack;
-    private IMyDictionary<String, IValue> symTable;
-    private IMyList<IValue> out;
+    private IStack<IStmt> exeStack;
+    private IDictionary<String, IValue> symTable;
+    private IList<IValue> out;
     private IStmt originalProgram;
-    private IMyDictionary<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
+    private IDictionary<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
 
-    public PrgState(IMyStack<IStmt> exeStack, IMyDictionary<String, IValue> symTable, IMyList<IValue> out, IStmt originalProgram, IMyDictionary<StringValue, BufferedReader> fileTable) {
+    public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable, IList<IValue> out, IStmt originalProgram, IDictionary<StringValue, BufferedReader> fileTable) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
@@ -25,19 +25,19 @@ public class PrgState {
         this.fileTable = fileTable;
     }
 
-    public IMyStack<IStmt> getExeStack() { return this.exeStack; }
+    public IStack<IStmt> getExeStack() { return this.exeStack; }
 
-    public IMyList<IValue> getOut() { return this.out; }
+    public IList<IValue> getOut() { return this.out; }
 
     public IStmt getOriginalProgram() {
         return originalProgram;
     }
 
-    public IMyDictionary<String, IValue> getSymTable() {
+    public IDictionary<String, IValue> getSymTable() {
         return symTable;
     }
 
-    public IMyDictionary<StringValue, BufferedReader> getFileTable() {
+    public IDictionary<StringValue, BufferedReader> getFileTable() {
         return fileTable;
     }
 

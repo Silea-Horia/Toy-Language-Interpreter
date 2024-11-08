@@ -4,7 +4,7 @@ import model.exception.DictionaryException;
 
 import java.util.Set;
 
-public interface IMyDictionary<K, V> {
+public interface IDictionary<K, V> {
     void insert(K k, V v);
     void remove(K k) throws DictionaryException;
     boolean contains(K k);

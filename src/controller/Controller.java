@@ -1,8 +1,7 @@
 package controller;
 
-import model.adt.IMyStack;
+import model.adt.IStack;
 import model.exception.ControllerException;
-import model.exception.RepoException;
 import model.exception.StackException;
 import model.exception.StmtException;
 import model.state.PrgState;
@@ -36,7 +35,7 @@ public class Controller {
     }
 
     public PrgState oneStep(PrgState prgState) throws ControllerException {
-        IMyStack<IStmt> stack = prgState.getExeStack();
+        IStack<IStmt> stack = prgState.getExeStack();
         try {
             IStmt crtStmt = stack.pop();
             try {

@@ -1,12 +1,11 @@
 package model.adt;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MyList<T> implements IMyList<T> {
-    private List<T> list;
+public class Out<T> implements IList<T> {
+    private java.util.List<T> list;
 
-    public MyList() { this.list = new ArrayList<T>(); }
+    public Out() { this.list = new ArrayList<T>(); }
 
     @Override
     public void add(T t) {
@@ -14,7 +13,7 @@ public class MyList<T> implements IMyList<T> {
     }
 
     @Override
-    public List<T> getAll() {
+    public java.util.List<T> getAll() {
         return this.list;
     }
 

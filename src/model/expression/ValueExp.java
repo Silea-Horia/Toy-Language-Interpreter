@@ -1,6 +1,6 @@
 package model.expression;
 
-import model.adt.IMyDictionary;
+import model.adt.IDictionary;
 import model.exception.ExpressionException;
 import model.value.IValue;
 
@@ -10,7 +10,7 @@ public class ValueExp implements IExp{
     public ValueExp(IValue e) { this.e = e; }
 
     @Override
-    public IValue eval(IMyDictionary<String, IValue> tbl) throws ExpressionException { return this.e; }
+    public IValue eval(IDictionary<String, IValue> tbl) throws ExpressionException { return this.e; }
 
     @Override
     public IExp deepCopy() {

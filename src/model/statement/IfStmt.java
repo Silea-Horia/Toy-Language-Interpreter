@@ -1,6 +1,6 @@
 package model.statement;
 
-import model.adt.IMyStack;
+import model.adt.IStack;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
@@ -27,7 +27,7 @@ public class IfStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws StmtException {
-        IMyStack<IStmt> stack = state.getExeStack();
+        IStack<IStmt> stack = state.getExeStack();
         IValue cond = null;
         try {
             cond = this.exp.eval(state.getSymTable());

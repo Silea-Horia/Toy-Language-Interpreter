@@ -2,6 +2,7 @@ package controller;
 
 import model.adt.IStack;
 import model.exception.ControllerException;
+import model.exception.RepoException;
 import model.exception.StackException;
 import model.exception.StmtException;
 import model.state.PrgState;
@@ -52,27 +53,23 @@ public class Controller {
         PrgState prgState = this.repository.getCrtState();
         if (this.displayFlag) {
             System.out.println(prgState);
-            // TODO
-            /*
             try {
                 this.repository.logPrgState();
             } catch (RepoException re) {
                 throw new ControllerException(re.getMessage());
             }
-            */
+
         }
         while (!prgState.getExeStack().isEmpty()) {
             oneStep(prgState);
             if (this.displayFlag) {
                 System.out.println(prgState);
-                // TODO
-                /*
                 try {
                     this.repository.logPrgState();
                 } catch (RepoException re) {
                     throw new ControllerException(re.getMessage());
                 }
-                */
+
             }
         }
     }

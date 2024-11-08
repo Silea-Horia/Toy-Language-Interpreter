@@ -49,15 +49,11 @@ public class ArithExp implements IExp {
 
     @Override
     public String toString() {
-        switch (this.op) {
-            case '+':
-                return this.e1 + "+" + this.e2;
-            case '-':
-                return this.e1 + "-" + this.e2;
-            case '*':
-                return this.e1 + "*" + this.e2;
-            default:
-                return this.e1 + "/" + this.e2;
-        }
+        return switch (this.op) {
+            case '+' -> this.e1 + "+" + this.e2;
+            case '-' -> this.e1 + "-" + this.e2;
+            case '*' -> this.e1 + "*" + this.e2;
+            default -> this.e1 + "/" + this.e2;
+        };
     }
 }

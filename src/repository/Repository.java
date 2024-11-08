@@ -13,9 +13,7 @@ import model.statement.*;
 import model.type.BoolType;
 import model.type.IntType;
 import model.value.BoolValue;
-import model.value.IValue;
 import model.value.IntValue;
-import model.value.StringValue;
 
 import java.io.*;
 import java.util.ArrayList;

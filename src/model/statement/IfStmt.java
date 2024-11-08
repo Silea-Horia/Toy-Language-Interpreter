@@ -28,7 +28,7 @@ public class IfStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws StmtException {
         IStack<IStmt> stack = state.getExeStack();
-        IValue cond = null;
+        IValue cond;
         try {
             cond = this.exp.eval(state.getSymTable());
         } catch (ExpressionException e) {

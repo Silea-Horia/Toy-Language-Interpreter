@@ -26,7 +26,7 @@ public class Repository implements IRepository {
     private int  currentProgramState;
 
     public Repository(String logFilePath) {
-        this.stateList = new ArrayList<PrgState>();
+        this.stateList = new ArrayList<>();
         this.logFilePath = logFilePath;
         this.currentProgramState = 0;
     }
@@ -46,7 +46,7 @@ public class Repository implements IRepository {
         try {
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(this.logFilePath, true)));
             pw.println(this.getCrtState());
-            pw.close();;
+            pw.close();
         } catch (IOException ex) {
             throw new RepoException(ex.getMessage());
         }
@@ -75,22 +75,13 @@ public class Repository implements IRepository {
 
     @Override
     public void setState(int option) {
-        IStmt initialStatementList;
-        switch (option){
-            case 1:
-                initialStatementList = this.generateState1();
-                break;
-            case 2:
-                initialStatementList = this.generateState2();
-                break;
-            case 3:
-                initialStatementList = this.generateState3();
-                break;
-            default:
-                initialStatementList = new NopStmt();
-
-        }
+        IStmt initialStatementList = switch (option) {
+            case 1 -> this.generateState1();
+            case 2 -> this.generateState2();
+            case 3 -> this.generateState3();
+            default -> new NopStmt();
+        };
         this.stateList.clear();
-        this.stateList.add(new PrgState(new ExeStack<IStmt>(), new SymTable<String, IValue>(), new Out<IValue>(), initialStatementList, new FileTable<StringValue, BufferedReader>()));
+        this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), initialStatementList, new FileTable<>()));
     }
 }

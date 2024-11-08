@@ -1,9 +1,7 @@
 package model.adt;
 
 import model.exception.DictionaryException;
-import model.value.StringValue;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +10,7 @@ public class FileTable<K, V> implements IDictionary<K, V> {
     private Map<K, V> map;
 
     public FileTable() {
-        this.map = new HashMap<K, V>();
+        this.map = new HashMap<>();
     }
 
     @Override

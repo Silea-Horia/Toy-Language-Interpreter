@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Out<T> implements IList<T> {
     private java.util.List<T> list;
 
-    public Out() { this.list = new ArrayList<T>(); }
+    public Out() { this.list = new ArrayList<>(); }
 
     @Override
     public void add(T t) {
@@ -20,9 +20,7 @@ public class Out<T> implements IList<T> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        this.list.forEach((t) -> {
-            str.append(t).append("\n");
-        });
+        this.list.forEach((t) -> str.append(t).append("\n"));
         return "Out:\n" + str;
     }
 }

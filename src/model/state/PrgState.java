@@ -15,7 +15,7 @@ public class PrgState {
     private IDictionary<String, IValue> symTable;
     private IList<IValue> out;
     private IStmt originalProgram;
-    private FileTable<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
+    private FileTable<StringValue, BufferedReader> fileTable;
 
     public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable, IList<IValue> out, IStmt originalProgram, FileTable<StringValue, BufferedReader> fileTable) {
         this.exeStack = exeStack;
@@ -46,14 +46,4 @@ public class PrgState {
     public String toString() {
         return "PrgState is:\n" + this.exeStack + this.symTable + this.out + this.fileTable;
     }
-
-    public String toStringFile() {
-        StringBuilder s = new StringBuilder("File table:\n");
-        for (StringValue v : this.fileTable.keys()) {
-            s.append(v.getValue()).append("\n");
-        }
-        return s.toString();
-    }
-
-    
 }

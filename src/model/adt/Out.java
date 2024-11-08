@@ -23,6 +23,6 @@ public class Out<T> implements IList<T> {
         this.list.forEach((t) -> {
             str.append(t).append("\n");
         });
-        return "Out:\n" + str + "\n";
+        return "Out:\n" + str;
     }
 }

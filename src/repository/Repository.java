@@ -1,5 +1,6 @@
 package repository;
 
+import model.adt.FileTable;
 import model.adt.SymTable;
 import model.adt.Out;
 import model.adt.ExeStack;
@@ -90,6 +91,6 @@ public class Repository implements IRepository {
 
         }
         this.stateList.clear();
-        this.stateList.add(new PrgState(new ExeStack<IStmt>(), new SymTable<String, IValue>(), new Out<IValue>(), initialStatementList, new SymTable<StringValue, BufferedReader>()));
+        this.stateList.add(new PrgState(new ExeStack<IStmt>(), new SymTable<String, IValue>(), new Out<IValue>(), initialStatementList, new FileTable<StringValue, BufferedReader>()));
     }
 }

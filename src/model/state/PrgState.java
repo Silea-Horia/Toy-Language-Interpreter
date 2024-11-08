@@ -1,5 +1,6 @@
 package model.state;
 
+import model.adt.FileTable;
 import model.adt.IDictionary;
 import model.adt.IList;
 import model.adt.IStack;
@@ -14,9 +15,9 @@ public class PrgState {
     private IDictionary<String, IValue> symTable;
     private IList<IValue> out;
     private IStmt originalProgram;
-    private IDictionary<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
+    private FileTable<StringValue, BufferedReader> fileTable;   // TODO MAKE THIS A CLASS
 
-    public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable, IList<IValue> out, IStmt originalProgram, IDictionary<StringValue, BufferedReader> fileTable) {
+    public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable, IList<IValue> out, IStmt originalProgram, FileTable<StringValue, BufferedReader> fileTable) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
@@ -43,8 +44,7 @@ public class PrgState {
 
     @Override
     public String toString() {
-        return "PrgState is:\n" + this.exeStack + this.symTable + this.out;
-        // TODO ADD THE FILE TABLE AT THE END
+        return "PrgState is:\n" + this.exeStack + this.symTable + this.out + this.fileTable;
     }
 
     public String toStringFile() {

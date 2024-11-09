@@ -29,6 +29,12 @@ public class Repository implements IRepository {
         this.stateList = new ArrayList<>();
         this.logFilePath = logFilePath;
         this.currentProgramState = 0;
+
+        try {
+            PrintWriter writer = new PrintWriter(logFilePath);
+            writer.print("");
+            writer.close();
+        } catch (FileNotFoundException _) {}
     }
 
     @Override

@@ -5,7 +5,7 @@ import view.TextMenu;
 import view.command.ExitCommand;
 import view.command.GetPrgCommand;
 import view.command.RunExampleCommand;
-// TODO IMPLEMENT THE RELATIONAL EXPRESSIONS
+
 public class Interpreter {
     public static void main(String[] args) {
         System.out.println("Hello world!");

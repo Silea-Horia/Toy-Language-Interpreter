@@ -44,7 +44,7 @@ public class Repository implements IRepository {
     @Override
     public void logPrgState() throws RepoException {
         try {
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(this.logFilePath, true)));  // TODO RESET FILE AT START
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(this.logFilePath, true)));
             pw.println(this.getCrtState());
             pw.close();
         } catch (IOException ex) {

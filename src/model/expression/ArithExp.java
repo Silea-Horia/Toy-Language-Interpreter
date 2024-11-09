@@ -9,7 +9,7 @@ import model.value.IntValue;
 public class ArithExp implements IExp {
     private IExp e1;
     private IExp e2;
-    private char op; // 1 - addition, 2 - subtraction, 3 - multiplication, 4 - division
+    private char op;
 
     public ArithExp(IExp e1, IExp e2, char op) {
         this.e1 = e1;

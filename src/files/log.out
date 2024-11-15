@@ -1,178 +1,72 @@
 PrgState is:
 ExeStack:
-(Declare variable with type: string, id=varf; (varf=src/files/test.in; (Open file: varf; (Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf))))))))
+(Declare variable with type: int, id=v; (v=2; print(v)))
 SymTable:
 Out:
 FileTable:
 
 PrgState is:
 ExeStack:
-Declare variable with type: string, id=varf
-(varf=src/files/test.in; (Open file: varf; (Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf)))))))
+Declare variable with type: int, id=v
+(v=2; print(v))
 SymTable:
 Out:
 FileTable:
 
 PrgState is:
 ExeStack:
-(varf=src/files/test.in; (Open file: varf; (Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf)))))))
+(v=2; print(v))
 SymTable:
-varf->
+v->0
 Out:
 FileTable:
 
 PrgState is:
 ExeStack:
-varf=src/files/test.in
-(Open file: varf; (Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf))))))
+v=2
+print(v)
 SymTable:
-varf->
+v->0
 Out:
 FileTable:
 
 PrgState is:
 ExeStack:
-(Open file: varf; (Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf))))))
+print(v)
 SymTable:
-varf->src/files/test.in
+v->2
 Out:
 FileTable:
 
 PrgState is:
 ExeStack:
-Open file: varf
-(Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf)))))
 SymTable:
-varf->src/files/test.in
+v->2
 Out:
+2
 FileTable:
 
 PrgState is:
 ExeStack:
-(Declare variable with type: int, id=varc; (Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf)))))
 SymTable:
-varf->src/files/test.in
+v->2
 Out:
+2
 FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-Declare variable with type: int, id=varc
-(Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf))))
-SymTable:
-varf->src/files/test.in
-Out:
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-(Read from file: varf; (print(varc); (Read from file: varf; (print(varc); Close file: varf))))
-SymTable:
-varf->src/files/test.in
-varc->0
-Out:
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-Read from file: varf
-(print(varc); (Read from file: varf; (print(varc); Close file: varf)))
-SymTable:
-varf->src/files/test.in
-varc->0
-Out:
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-(print(varc); (Read from file: varf; (print(varc); Close file: varf)))
-SymTable:
-varf->src/files/test.in
-varc->10
-Out:
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-print(varc)
-(Read from file: varf; (print(varc); Close file: varf))
-SymTable:
-varf->src/files/test.in
-varc->10
-Out:
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-(Read from file: varf; (print(varc); Close file: varf))
-SymTable:
-varf->src/files/test.in
-varc->10
-Out:
-10
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-Read from file: varf
-(print(varc); Close file: varf)
-SymTable:
-varf->src/files/test.in
-varc->10
-Out:
-10
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-(print(varc); Close file: varf)
-SymTable:
-varf->src/files/test.in
-varc->20
-Out:
-10
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-print(varc)
-Close file: varf
-SymTable:
-varf->src/files/test.in
-varc->20
-Out:
-10
-FileTable:
-src/files/test.in
-
-PrgState is:
-ExeStack:
-Close file: varf
-SymTable:
-varf->src/files/test.in
-varc->20
-Out:
-10
-20
-FileTable:
-src/files/test.in
 
 PrgState is:
 ExeStack:
 SymTable:
-varf->src/files/test.in
-varc->20
+v->2
 Out:
-10
-20
+2
+FileTable:
+
+PrgState is:
+ExeStack:
+SymTable:
+v->2
+Out:
+2
 FileTable:
 

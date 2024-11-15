@@ -1,9 +1,6 @@
 package model.state;
 
-import model.adt.FileTable;
-import model.adt.IDictionary;
-import model.adt.IList;
-import model.adt.IStack;
+import model.adt.*;
 import model.statement.IStmt;
 import model.value.IValue;
 import model.value.StringValue;
@@ -11,13 +8,13 @@ import model.value.StringValue;
 import java.io.BufferedReader;
 
 public class PrgState {
-    private IStack<IStmt> exeStack;
-    private IDictionary<String, IValue> symTable;
-    private IList<IValue> out;
+    private IExeStack<IStmt> exeStack;
+    private ISymTable<String, IValue> symTable;
+    private IOutList<IValue> out;
     private IStmt originalProgram;
-    private FileTable<StringValue, BufferedReader> fileTable;
+    private IFileTable<StringValue, BufferedReader> fileTable;
 
-    public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable, IList<IValue> out, IStmt originalProgram, FileTable<StringValue, BufferedReader> fileTable) {
+    public PrgState(IExeStack<IStmt> exeStack, ISymTable<String, IValue> symTable, IOutList<IValue> out, IStmt originalProgram, IFileTable<StringValue, BufferedReader> fileTable) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
@@ -26,19 +23,19 @@ public class PrgState {
         this.fileTable = fileTable;
     }
 
-    public IStack<IStmt> getExeStack() { return this.exeStack; }
+    public IExeStack<IStmt> getExeStack() { return this.exeStack; }
 
-    public IList<IValue> getOut() { return this.out; }
+    public IOutList<IValue> getOut() { return this.out; }
 
     public IStmt getOriginalProgram() {
         return originalProgram;
     }
 
-    public IDictionary<String, IValue> getSymTable() {
+    public ISymTable<String, IValue> getSymTable() {
         return symTable;
     }
 
-    public IDictionary<StringValue, BufferedReader> getFileTable() {
+    public IFileTable<StringValue, BufferedReader> getFileTable() {
         return fileTable;
     }
 

@@ -10,7 +10,7 @@ public class Interpreter {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        IRepository repository = new Repository("src/log.out");  //TODO READ THE PATH FROM THE KEYBOARD
+        IRepository repository = new Repository("src/files/log.out");
         Controller controller = new Controller(repository);
 
         TextMenu menu = new TextMenu();

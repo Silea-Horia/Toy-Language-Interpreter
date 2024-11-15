@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FileTable<K, V> implements IDictionary<K, V> {
+public class FileTable<K, V> implements IFileTable<K, V> {
     private Map<K, V> map;
 
     public FileTable() {

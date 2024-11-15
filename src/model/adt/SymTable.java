@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class SymTable<K, V> implements IDictionary<K, V> {
+public class SymTable<K, V> implements ISymTable<K, V> {
     private Map<K, V> map;
 
     public SymTable() { this.map = new HashMap<K, V>(); }

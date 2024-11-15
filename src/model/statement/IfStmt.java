@@ -1,6 +1,6 @@
 package model.statement;
 
-import model.adt.IStack;
+import model.adt.IExeStack;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
@@ -13,11 +13,13 @@ public class IfStmt implements IStmt {
     private IExp exp;
     private IStmt thenS;
     private IStmt elseS;
+    private static BoolType boolType;
 
     public IfStmt(IExp exp, IStmt thenS, IStmt elseS) {
         this.exp = exp;
         this.thenS = thenS;
         this.elseS = elseS;
+        boolType = new BoolType();
     }
 
     @Override
@@ -27,14 +29,14 @@ public class IfStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws StmtException {
-        IStack<IStmt> stack = state.getExeStack();
+        IExeStack<IStmt> stack = state.getExeStack();
         IValue cond;
         try {
             cond = this.exp.eval(state.getSymTable());
         } catch (ExpressionException e) {
             throw new StmtException(e.getMessage());
         }
-        if (!cond.getType().equals(new BoolType())) throw new StmtException("Conditional expression is not a boolean!|n");
+        if (!cond.getType().equals(boolType)) throw new StmtException("Conditional expression is not a boolean!|n");
         if (((BoolValue)cond).getValue()) stack.push(this.thenS);
         else stack.push(this.elseS);
         return state;

@@ -2,7 +2,7 @@ package model.adt;
 
 import java.util.List;
 
-public interface IList<T> {
+public interface IOutList<T> {
     void add(T t);
     List<T> getAll();
 }

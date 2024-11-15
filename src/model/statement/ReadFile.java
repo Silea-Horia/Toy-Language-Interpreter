@@ -1,6 +1,6 @@
 package model.statement;
 
-import model.adt.IDictionary;
+import model.adt.ISymTable;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
@@ -17,29 +17,33 @@ import java.io.IOException;
 
 public class ReadFile implements IStmt {
     private IExp exp;
-    String varName;
+    private String varName;
+    private static IntType intType;
+    private static StringType stringType;
 
     public ReadFile(IExp exp, String varName) {
         this.exp = exp;
         this.varName = varName;
+        stringType = new StringType();
+        intType = new IntType();
     }
 
     @Override
     public PrgState execute(PrgState state) throws StmtException {
-        IDictionary<String, IValue> symTable = state.getSymTable();
+        ISymTable<String, IValue> symTable = state.getSymTable();
 
         if (!symTable.contains(this.varName)) {
             throw new StmtException("Variable doesn't exist");
         }
 
         try {
-            if (!symTable.lookup(this.varName).getType().equals(new IntType())) {
+            if (!symTable.lookup(this.varName).getType().equals(intType)) {
                 throw new StmtException("Variable isn't type int");
             }
 
             IValue eval = this.exp.eval(symTable);
 
-            if (!eval.getType().equals(new StringType())) {
+            if (!eval.getType().equals(stringType)) {
                 throw new StmtException("Expression result isn't type string");
             }
 

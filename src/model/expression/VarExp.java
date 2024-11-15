@@ -1,6 +1,6 @@
 package model.expression;
 
-import model.adt.IDictionary;
+import model.adt.ISymTable;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.value.IValue;
@@ -11,7 +11,7 @@ public class VarExp implements IExp {
     public VarExp(String id) { this.id = id; }
 
     @Override
-    public IValue eval(IDictionary<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException {
         try {
             return tbl.lookup(this.id);
         } catch (DictionaryException ex) {

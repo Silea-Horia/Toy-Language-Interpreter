@@ -1,6 +1,6 @@
 package model.expression;
 
-import model.adt.IDictionary;
+import model.adt.ISymTable;
 import model.exception.ExpressionException;
 import model.type.IntType;
 import model.value.IValue;
@@ -18,7 +18,7 @@ public class ArithExp implements IExp {
     }
 
     @Override
-    public IValue eval(IDictionary<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException {
         IValue v1, v2;
         v1 = this.e1.eval(tbl);
         if (v1.getType().equals(new IntType())) {

@@ -14,9 +14,11 @@ import java.io.IOException;
 
 public class CloseRFile implements IStmt {
     private IExp exp;
+    private static StringType stringType;
 
     public CloseRFile(IExp exp) {
         this.exp = exp;
+        stringType = new StringType();
     }
 
     @Override
@@ -24,7 +26,7 @@ public class CloseRFile implements IStmt {
         try {
             IValue eval = this.exp.eval(state.getSymTable());
 
-            if (!eval.getType().equals(new StringType())) {
+            if (!eval.getType().equals(stringType)) {
                 throw new ExpressionException("Expression is not a string");
             }
 

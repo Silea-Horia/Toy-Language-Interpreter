@@ -81,7 +81,7 @@ public class Repository implements IRepository {
 
     private IStmt generateState4() {
         return new CompStmt(new VarDeclStmt("varf",new StringType()),
-                new CompStmt(new AssignStmt("varf", new ValueExp(new StringValue("src/test.in"))),
+                new CompStmt(new AssignStmt("varf", new ValueExp(new StringValue("src/files/test.in"))),
                         new CompStmt(new OpenRFile(new VarExp("varf")),
                                 new CompStmt(new VarDeclStmt("varc", new IntType()),
                                         new CompStmt(new ReadFile(new VarExp("varf"), "varc"),

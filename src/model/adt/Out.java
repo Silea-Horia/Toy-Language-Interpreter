@@ -2,7 +2,7 @@ package model.adt;
 
 import java.util.ArrayList;
 
-public class Out<T> implements IList<T> {
+public class Out<T> implements IOutList<T> {
     private java.util.List<T> list;
 
     public Out() { this.list = new ArrayList<>(); }

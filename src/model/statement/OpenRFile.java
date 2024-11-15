@@ -14,9 +14,11 @@ import java.io.FileReader;
 
 public class OpenRFile implements IStmt {
     private IExp exp;
+    private static StringType stringType;
 
     public OpenRFile(IExp exp) {
         this.exp = exp;
+        stringType = new StringType();
     }
 
     @Override
@@ -24,7 +26,7 @@ public class OpenRFile implements IStmt {
         try {
             IValue result = this.exp.eval(state.getSymTable());
 
-            if (!result.getType().equals(new StringType())) {
+            if (!result.getType().equals(stringType)) {
                 throw new StmtException("Expression is not a string\n");
             }
 

@@ -9,7 +9,7 @@ import java.util.Set;
 public class SymTable<K, V> implements ISymTable<K, V> {
     private Map<K, V> map;
 
-    public SymTable() { this.map = new HashMap<K, V>(); }
+    public SymTable() { this.map = new HashMap<>(); }
 
     @Override
     public void insert(K k, V v) {
@@ -41,9 +41,7 @@ public class SymTable<K, V> implements ISymTable<K, V> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        this.map.forEach((k, v) -> {
-            str.append(k).append("->").append(v).append("\n");
-        });
+        this.map.forEach((k, v) -> str.append(k).append("->").append(v).append("\n"));
         return "SymTable:\n" + str;
     }
 }

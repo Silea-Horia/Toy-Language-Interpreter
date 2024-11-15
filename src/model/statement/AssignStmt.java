@@ -30,7 +30,7 @@ public class AssignStmt implements IStmt {
         ISymTable<String, IValue> tbl = state.getSymTable();
         IType typeId;
         if (tbl.contains(this.id)) {
-            IValue val = null;
+            IValue val;
             try {
                 val = this.exp.eval(tbl);
             } catch (ExpressionException e) {

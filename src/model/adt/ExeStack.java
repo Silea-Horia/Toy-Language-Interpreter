@@ -8,7 +8,7 @@ import java.util.Deque;
 public class ExeStack<T> implements IExeStack<T> {
     private Deque<T> stack;
 
-    public ExeStack() { this.stack = new ArrayDeque<T>(); }
+    public ExeStack() { this.stack = new ArrayDeque<>(); }
 
     @Override
     public void push(T t) {
@@ -34,9 +34,7 @@ public class ExeStack<T> implements IExeStack<T> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        this.stack.forEach((t) -> {
-            str.append(t).append("\n");
-        });
+        this.stack.forEach((t) -> str.append(t).append("\n"));
         return "ExeStack:\n" + str;
     }
 }

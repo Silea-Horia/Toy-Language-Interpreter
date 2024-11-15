@@ -9,5 +9,5 @@ public interface ISymTable<K, V> {
     void remove(K k) throws DictionaryException;
     boolean contains(K k);
     V lookup(K k) throws DictionaryException;
-    public Set<K> keys();
+    Set<K> keys();
 }

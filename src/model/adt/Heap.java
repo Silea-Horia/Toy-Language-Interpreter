@@ -55,4 +55,11 @@ public class Heap<A, V> implements IHeap<A, V> {
     public Set<A> keys() {
         return (Set<A>) this.memory.keySet();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        this.memory.forEach((a, v) -> str.append(a).append("->").append(v).append("\n"));
+        return "SymTable:\n" + str;
+    }
 }

@@ -13,9 +13,9 @@ public class PrgState {
     private IOutList<IValue> out;
     private IStmt originalProgram;
     private IFileTable<StringValue, BufferedReader> fileTable;
-    private IHeap<Integer, IValue> heap;
+    private IHeap heap;
 
-    public PrgState(IExeStack<IStmt> exeStack, ISymTable<String, IValue> symTable, IOutList<IValue> out, IStmt originalProgram, IFileTable<StringValue, BufferedReader> fileTable, IHeap<Integer, IValue> heap) {
+    public PrgState(IExeStack<IStmt> exeStack, ISymTable<String, IValue> symTable, IOutList<IValue> out, IStmt originalProgram, IFileTable<StringValue, BufferedReader> fileTable, IHeap heap) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
@@ -33,7 +33,7 @@ public class PrgState {
         return this.originalProgram;
     }
 
-    public IHeap<Integer, IValue> getHeap() { return this.heap; }
+    public IHeap getHeap() { return this.heap; }
 
     public ISymTable<String, IValue> getSymTable() {
         return this.symTable;

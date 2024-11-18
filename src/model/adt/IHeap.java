@@ -1,15 +1,15 @@
 package model.adt;
 
 import model.exception.DictionaryException;
-import model.exception.StackException;
 import model.value.IValue;
 
 import java.util.Set;
 
-public interface IHeap<A, V> {
-    void insert(V v);
-    void remove(A a) throws DictionaryException;
-    boolean contains(A a);
-    V lookup(A a) throws DictionaryException;
-    Set<A> keys();
+public interface IHeap {
+    void allocate(IValue value);
+    void deallocate(Integer address) throws DictionaryException;
+    boolean contains(Integer address);
+    IValue getValue(Integer address) throws DictionaryException;
+    Set<Integer> addresses();
+    void set(Integer address, IValue newValue) throws DictionaryException;
 }

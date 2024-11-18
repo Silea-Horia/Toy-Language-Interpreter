@@ -1,13 +1,14 @@
 package model.adt;
 
 import model.exception.DictionaryException;
+import model.type.IType;
 import model.value.IValue;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Heap<A, V> implements IHeap<A, V> {
+public class Heap implements IHeap {
     private int nextFree;
     private Map<Integer, IValue> memory;
 
@@ -24,36 +25,44 @@ public class Heap<A, V> implements IHeap<A, V> {
     }
 
     @Override
-    public void insert(V v) {
-        this.memory.put(this.nextFree, (IValue) v);
+    public void allocate(IValue value) {
+        this.memory.put(this.nextFree, value);
         this.getNextFree();
     }
 
     @Override
-    public void remove(A a) throws DictionaryException {
-        if (!this.memory.containsKey((Integer)a)) {
+    public void deallocate(Integer address) throws DictionaryException {
+        if (!this.memory.containsKey(address)) {
             throw new DictionaryException("Heap address is not instantiated!\n");
         }
-        this.memory.remove((Integer)a);
-        if ((Integer)a < this.nextFree) this.nextFree = (Integer)a;
+        this.memory.remove(address);
+        if (address < this.nextFree) this.nextFree = address;
     }
 
     @Override
-    public boolean contains(A a) {
-        return this.memory.containsKey((Integer)a);
+    public boolean contains(Integer address) {
+        return this.memory.containsKey(address);
     }
 
     @Override
-    public V lookup(A a) throws DictionaryException {
-        if (!this.memory.containsKey((Integer)a)) {
+    public IValue getValue(Integer address) throws DictionaryException {
+        if (!this.memory.containsKey(address)) {
             throw new DictionaryException("Heap address is not instantiated!\n");
         }
-        return (V) this.memory.get((Integer)a);
+        return this.memory.get(address);
     }
 
     @Override
-    public Set<A> keys() {
-        return (Set<A>) this.memory.keySet();
+    public Set<Integer> addresses() {
+        return this.memory.keySet();
+    }
+
+    @Override
+    public void set(Integer address, IValue newValue) throws DictionaryException {
+        if (!this.memory.containsKey(address)) {
+            throw new DictionaryException("Heap address is not instantiated!\n");
+        }
+        this.memory.put(address, newValue);
     }
 
     @Override

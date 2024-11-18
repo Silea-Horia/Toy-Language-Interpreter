@@ -100,6 +100,6 @@ public class Repository implements IRepository {
             default -> this.initialStatement = new NopStmt();
         };
         this.stateList.clear();
-        this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>(), new Heap<>()));
+        this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>(), new Heap()));
     }
 }

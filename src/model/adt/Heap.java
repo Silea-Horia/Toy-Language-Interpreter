@@ -60,6 +60,6 @@ public class Heap<A, V> implements IHeap<A, V> {
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.memory.forEach((a, v) -> str.append(a).append("->").append(v).append("\n"));
-        return "SymTable:\n" + str;
+        return "Heap:\n" + str;
     }
 }

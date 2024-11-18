@@ -13,12 +13,14 @@ public class PrgState {
     private IOutList<IValue> out;
     private IStmt originalProgram;
     private IFileTable<StringValue, BufferedReader> fileTable;
+    private IHeap<Integer, IValue> heap;
 
-    public PrgState(IExeStack<IStmt> exeStack, ISymTable<String, IValue> symTable, IOutList<IValue> out, IStmt originalProgram, IFileTable<StringValue, BufferedReader> fileTable) {
+    public PrgState(IExeStack<IStmt> exeStack, ISymTable<String, IValue> symTable, IOutList<IValue> out, IStmt originalProgram, IFileTable<StringValue, BufferedReader> fileTable, IHeap<Integer, IValue> heap) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
         this.originalProgram = originalProgram.deepCopy();
+        this.heap = heap;
         this.exeStack.push(originalProgram);
         this.fileTable = fileTable;
     }
@@ -28,19 +30,21 @@ public class PrgState {
     public IOutList<IValue> getOut() { return this.out; }
 
     public IStmt getOriginalProgram() {
-        return originalProgram;
+        return this.originalProgram;
     }
 
+    public IHeap<Integer, IValue> getHeap() { return this.heap; }
+
     public ISymTable<String, IValue> getSymTable() {
-        return symTable;
+        return this.symTable;
     }
 
     public IFileTable<StringValue, BufferedReader> getFileTable() {
-        return fileTable;
+        return this.fileTable;
     }
 
     @Override
     public String toString() {
-        return "PrgState is:\n" + this.exeStack + this.symTable + this.out + this.fileTable;
+        return "PrgState is:\n" + this.exeStack + this.symTable + this.out + this.fileTable + this.heap;
     }
 }

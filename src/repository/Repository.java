@@ -1,9 +1,6 @@
 package repository;
 
-import model.adt.FileTable;
-import model.adt.SymTable;
-import model.adt.Out;
-import model.adt.ExeStack;
+import model.adt.*;
 import model.exception.RepoException;
 import model.expression.ArithExp;
 import model.expression.ValueExp;
@@ -103,6 +100,6 @@ public class Repository implements IRepository {
             default -> this.initialStatement = new NopStmt();
         };
         this.stateList.clear();
-        this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>()));
+        this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>(), new Heap<>()));
     }
 }

@@ -35,4 +35,12 @@ public class LogicExp implements IExp{
     public IExp deepCopy() {
         return new LogicExp(this.e1.deepCopy(), this.e2.deepCopy(), this.op);
     }
+
+    @Override
+    public String toString() {
+        return switch (this.op) {
+            case 1 -> this.e1 + "&" + this.e2;
+            default -> this.e1 + "|" + this.e2;
+        };
+    }
 }

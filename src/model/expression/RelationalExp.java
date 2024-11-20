@@ -70,4 +70,17 @@ public class RelationalExp implements IExp {
     public IExp deepCopy() {
         return new RelationalExp(left.deepCopy(), right.deepCopy(), relation);
     }
+
+    @Override
+    public String toString() {
+        return switch (this.relation) {
+            case SMALLER -> this.left + "<" + this.right;
+            case SMALLEROREQUAL -> this.left + "<=" + this.right;
+            case GREATER -> this.left + ">" + this.right;
+            case GREATEROREQUAL -> this.left + ">=" + this.right;
+            case EQUAL -> this.left + "==" + this.right;
+            case NOTEQUAL -> this.left + "!=" + this.right;
+            default -> this.left + "?" + this.right;
+        };
+    }
 }

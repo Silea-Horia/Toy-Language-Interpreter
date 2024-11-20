@@ -20,7 +20,7 @@ public class RefType implements IType {
 
     @Override
     public String toString() {
-        return "Ref(" + this.inner + ')';
+        return "Ref " + this.inner + ')';
     }
 
     @Override

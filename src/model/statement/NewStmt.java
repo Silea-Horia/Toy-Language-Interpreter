@@ -31,15 +31,17 @@ public class NewStmt implements IStmt {
                 throw new StmtException("Variable is not a ref type\n");
             }
 
+            RefValue refValue = (RefValue) value;
+
             IValue res = this.exp.eval(state.getSymTable());
 
-            if (!((RefValue)value).getLocationType().equals(res.getType())) {
+            if (!refValue.getLocationType().equals(res.getType())) {
                 throw new StmtException("The expression type is different from the reference type\n");
             }
 
             int address = state.getHeap().allocate(res);
 
-            state.getSymTable().insert(this.varName, new RefValue(address, ((RefValue)value).getLocationType()));
+            state.getSymTable().insert(this.varName, new RefValue(address, refValue.getLocationType()));
 
             return state;
         } catch (DictionaryException | ExpressionException e) {

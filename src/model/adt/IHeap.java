@@ -6,7 +6,7 @@ import model.value.IValue;
 import java.util.Set;
 
 public interface IHeap {
-    void allocate(IValue value);
+    Integer allocate(IValue value);
     void deallocate(Integer address) throws DictionaryException;
     boolean contains(Integer address);
     IValue getValue(Integer address) throws DictionaryException;

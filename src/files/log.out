@@ -4,6 +4,7 @@ ExeStack:
 SymTable:
 Out:
 FileTable:
+Heap:
 
 PrgState is:
 ExeStack:
@@ -12,6 +13,7 @@ Declare variable with type: int, id=v
 SymTable:
 Out:
 FileTable:
+Heap:
 
 PrgState is:
 ExeStack:
@@ -20,6 +22,7 @@ SymTable:
 v->0
 Out:
 FileTable:
+Heap:
 
 PrgState is:
 ExeStack:
@@ -29,6 +32,7 @@ SymTable:
 v->0
 Out:
 FileTable:
+Heap:
 
 PrgState is:
 ExeStack:
@@ -37,6 +41,7 @@ SymTable:
 v->2
 Out:
 FileTable:
+Heap:
 
 PrgState is:
 ExeStack:
@@ -45,28 +50,5 @@ v->2
 Out:
 2
 FileTable:
-
-PrgState is:
-ExeStack:
-SymTable:
-v->2
-Out:
-2
-FileTable:
-
-PrgState is:
-ExeStack:
-SymTable:
-v->2
-Out:
-2
-FileTable:
-
-PrgState is:
-ExeStack:
-SymTable:
-v->2
-Out:
-2
-FileTable:
+Heap:
 

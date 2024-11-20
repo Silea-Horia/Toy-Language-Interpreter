@@ -1,7 +1,6 @@
 package model.adt;
 
 import model.exception.DictionaryException;
-import model.type.IType;
 import model.value.IValue;
 
 import java.util.HashMap;
@@ -25,9 +24,11 @@ public class Heap implements IHeap {
     }
 
     @Override
-    public void allocate(IValue value) {
+    public Integer allocate(IValue value) {
+        int addr = this.nextFree;
         this.memory.put(this.nextFree, value);
         this.getNextFree();
+        return addr;
     }
 
     @Override

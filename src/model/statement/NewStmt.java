@@ -1,7 +1,5 @@
 package model.statement;
 
-import model.adt.Heap;
-import model.adt.IHeap;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
@@ -33,7 +31,7 @@ public class NewStmt implements IStmt {
 
             RefValue refValue = (RefValue) value;
 
-            IValue res = this.exp.eval(state.getSymTable());
+            IValue res = this.exp.eval(state.getSymTable(), state.getHeap());
 
             if (!refValue.getLocationType().equals(res.getType())) {
                 throw new StmtException("The expression type is different from the reference type\n");

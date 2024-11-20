@@ -5,7 +5,6 @@ import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
-import model.type.IType;
 import model.type.IntType;
 import model.type.StringType;
 import model.value.IValue;
@@ -35,7 +34,7 @@ public class ReadFileStmt implements IStmt {
         }
         IValue result = null;
         try {
-            result = this.exp.eval(state.getSymTable());
+            result = this.exp.eval(state.getSymTable(), state.getHeap());
         } catch (ExpressionException e) {
             throw new StmtException(e.getMessage());
         }

@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
 import model.type.IntType;
@@ -19,15 +20,15 @@ public class RelationalExp implements IExp {
     }
 
     @Override
-    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(ISymTable<String, IValue> tbl, IHeap heap) throws ExpressionException {
         try {
-            IValue leftVal = left.eval(tbl);
+            IValue leftVal = left.eval(tbl, heap);
 
             if (!leftVal.getType().equals(new IntType())) {
                 throw new ExpressionException("Left operand is not an Int type\n");
             }
 
-            IValue rightVal = right.eval(tbl);
+            IValue rightVal = right.eval(tbl, heap);
 
             if (!rightVal.getType().equals(new IntType())) {
                 throw new ExpressionException("Right operand is not an Int type\n");

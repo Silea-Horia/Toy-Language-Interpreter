@@ -24,7 +24,7 @@ public class OpenRFile implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws StmtException {
         try {
-            IValue result = this.exp.eval(state.getSymTable());
+            IValue result = this.exp.eval(state.getSymTable(), state.getHeap());
 
             if (!result.getType().equals(stringType)) {
                 throw new StmtException("Expression is not a string\n");

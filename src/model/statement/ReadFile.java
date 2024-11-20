@@ -41,7 +41,7 @@ public class ReadFile implements IStmt {
                 throw new StmtException("Variable isn't type int");
             }
 
-            IValue eval = this.exp.eval(symTable);
+            IValue eval = this.exp.eval(symTable, state.getHeap());
 
             if (!eval.getType().equals(stringType)) {
                 throw new StmtException("Expression result isn't type string");

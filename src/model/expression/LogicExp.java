@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
 import model.type.BoolType;
@@ -18,11 +19,11 @@ public class LogicExp implements IExp{
     }
 
     @Override
-    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(ISymTable<String, IValue> tbl, IHeap heap) throws ExpressionException {
         IValue v1, v2;
-        v1 = this.e1.eval(tbl);
+        v1 = this.e1.eval(tbl, heap);
         if (v1.getType().equals(new BoolType())) {
-            v2 = this.e2.eval(tbl);
+            v2 = this.e2.eval(tbl, heap);
             if (v2.getType().equals(new BoolType())) {
                 if (this.op == 1) return new BoolValue(((BoolValue)v1).getValue() && ((BoolValue)v2).getValue());
                 else return new BoolValue(((BoolValue)v1).getValue() || ((BoolValue)v2).getValue()  );

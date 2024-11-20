@@ -24,7 +24,7 @@ public class CloseRFile implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws StmtException {
         try {
-            IValue eval = this.exp.eval(state.getSymTable());
+            IValue eval = this.exp.eval(state.getSymTable(), state.getHeap());
 
             if (!eval.getType().equals(stringType)) {
                 throw new ExpressionException("Expression is not a string");

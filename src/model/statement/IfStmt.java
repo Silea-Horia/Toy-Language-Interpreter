@@ -32,7 +32,7 @@ public class IfStmt implements IStmt {
         IExeStack<IStmt> stack = state.getExeStack();
         IValue cond;
         try {
-            cond = this.exp.eval(state.getSymTable());
+            cond = this.exp.eval(state.getSymTable(), state.getHeap());
         } catch (ExpressionException e) {
             throw new StmtException(e.getMessage());
         }

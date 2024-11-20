@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
 import model.type.IntType;
@@ -18,11 +19,11 @@ public class ArithExp implements IExp {
     }
 
     @Override
-    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException {
+    public IValue eval(ISymTable<String, IValue> tbl, IHeap heap) throws ExpressionException {
         IValue v1, v2;
-        v1 = this.e1.eval(tbl);
+        v1 = this.e1.eval(tbl, heap);
         if (v1.getType().equals(new IntType())) {
-            v2 = this.e2.eval(tbl);
+            v2 = this.e2.eval(tbl, heap);
             if (v2.getType().equals(new IntType())) {
                 int n1 = ((IntValue)v1).getValue();
                 int n2 = ((IntValue)v2).getValue();

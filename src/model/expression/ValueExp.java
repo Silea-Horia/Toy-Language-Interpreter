@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
 import model.value.IValue;
@@ -10,7 +11,7 @@ public class ValueExp implements IExp{
     public ValueExp(IValue e) { this.e = e; }
 
     @Override
-    public IValue eval(ISymTable<String, IValue> tbl) throws ExpressionException { return this.e; }
+    public IValue eval(ISymTable<String, IValue> tbl, IHeap heap) throws ExpressionException { return this.e; }
 
     @Override
     public IExp deepCopy() {

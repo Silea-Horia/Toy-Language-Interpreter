@@ -32,7 +32,7 @@ public class AssignStmt implements IStmt {
         if (tbl.contains(this.id)) {
             IValue val;
             try {
-                val = this.exp.eval(tbl);
+                val = this.exp.eval(tbl, state.getHeap());
             } catch (ExpressionException e) {
                 throw new StmtException(e.getMessage());
             }

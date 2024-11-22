@@ -1,6 +1,6 @@
 PrgState is:
 ExeStack:
-(Declare variable with type: int, id=v; (v=2; print(v)))
+(Declare variable with type: Ref (int), id=v; (new(v, 20); (Declare variable with type: Ref (Ref (int)), id=a; (new(a, v); (print(v); print(a))))))
 SymTable:
 Out:
 FileTable:
@@ -8,8 +8,8 @@ Heap:
 
 PrgState is:
 ExeStack:
-Declare variable with type: int, id=v
-(v=2; print(v))
+Declare variable with type: Ref (int), id=v
+(new(v, 20); (Declare variable with type: Ref (Ref (int)), id=a; (new(a, v); (print(v); print(a)))))
 SymTable:
 Out:
 FileTable:
@@ -17,38 +17,115 @@ Heap:
 
 PrgState is:
 ExeStack:
-(v=2; print(v))
+(new(v, 20); (Declare variable with type: Ref (Ref (int)), id=a; (new(a, v); (print(v); print(a)))))
 SymTable:
-v->0
+v->(0, int)
 Out:
 FileTable:
 Heap:
 
 PrgState is:
 ExeStack:
-v=2
+new(v, 20)
+(Declare variable with type: Ref (Ref (int)), id=a; (new(a, v); (print(v); print(a))))
+SymTable:
+v->(0, int)
+Out:
+FileTable:
+Heap:
+
+PrgState is:
+ExeStack:
+(Declare variable with type: Ref (Ref (int)), id=a; (new(a, v); (print(v); print(a))))
+SymTable:
+v->(1, int)
+Out:
+FileTable:
+Heap:
+1->20
+
+PrgState is:
+ExeStack:
+Declare variable with type: Ref (Ref (int)), id=a
+(new(a, v); (print(v); print(a)))
+SymTable:
+v->(1, int)
+Out:
+FileTable:
+Heap:
+1->20
+
+PrgState is:
+ExeStack:
+(new(a, v); (print(v); print(a)))
+SymTable:
+a->(0, Ref (int))
+v->(1, int)
+Out:
+FileTable:
+Heap:
+1->20
+
+PrgState is:
+ExeStack:
+new(a, v)
+(print(v); print(a))
+SymTable:
+a->(0, Ref (int))
+v->(1, int)
+Out:
+FileTable:
+Heap:
+1->20
+
+PrgState is:
+ExeStack:
+(print(v); print(a))
+SymTable:
+a->(2, Ref (int))
+v->(1, int)
+Out:
+FileTable:
+Heap:
+1->20
+2->(1, int)
+
+PrgState is:
+ExeStack:
 print(v)
+print(a)
 SymTable:
-v->0
+a->(2, Ref (int))
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
+2->(1, int)
 
 PrgState is:
 ExeStack:
-print(v)
+print(a)
 SymTable:
-v->2
+a->(2, Ref (int))
+v->(1, int)
 Out:
+(1, int)
 FileTable:
 Heap:
+1->20
+2->(1, int)
 
 PrgState is:
 ExeStack:
 SymTable:
-v->2
+a->(2, Ref (int))
+v->(1, int)
 Out:
-2
+(1, int)
+(2, Ref (int))
 FileTable:
 Heap:
+1->20
+2->(1, int)
 

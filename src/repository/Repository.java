@@ -9,6 +9,7 @@ import model.state.PrgState;
 import model.statement.*;
 import model.type.BoolType;
 import model.type.IntType;
+import model.type.RefType;
 import model.type.StringType;
 import model.value.BoolValue;
 import model.value.IntValue;
@@ -90,6 +91,14 @@ public class Repository implements IRepository {
                                                                         new CloseRFile(new VarExp("varf"))))))))));
     }
 
+    private void generateState5() {
+        this.initialStatement =  new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                        new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                new CompStmt(new NewStmt("a", new VarExp("v")),
+                                        new CompStmt(new PrintStmt(new VarExp("v")), new PrintStmt(new VarExp("a")))))));
+    }
+
     @Override
     public void setState(int option) {
         switch (option) {
@@ -97,6 +106,7 @@ public class Repository implements IRepository {
             case 2 -> this.generateState2();
             case 3 -> this.generateState3();
             case 4 -> this.generateState4();
+            case 5 -> this.generateState5();
             default -> this.initialStatement = new NopStmt();
         };
         this.stateList.clear();

@@ -24,7 +24,7 @@ public class RefValue implements IValue {
 
     @Override
     public IType getType() {
-        return new RefType(this.locationType);
+        return new RefType(null);
     }
 
     @Override

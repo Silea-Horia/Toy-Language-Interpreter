@@ -12,15 +12,16 @@ public class RefType implements IType {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof RefType) {
-            return inner.equals(((RefType) obj).inner);
-        }
-        return false;
+        return obj instanceof RefType;
+//        if (obj instanceof RefType) {
+//            return inner.equals(((RefType) obj).inner);
+//        }
+//        return false;
     }
 
     @Override
     public String toString() {
-        return "Ref " + this.inner + ')';
+        return "Ref (" + this.inner + ')';
     }
 
     @Override

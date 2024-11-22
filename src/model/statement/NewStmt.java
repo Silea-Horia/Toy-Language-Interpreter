@@ -5,6 +5,7 @@ import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
+import model.type.IType;
 import model.type.RefType;
 import model.value.IValue;
 import model.value.RefValue;
@@ -24,7 +25,7 @@ public class NewStmt implements IStmt {
     public PrgState execute(PrgState state) throws StmtException {
         try {
             IValue value = state.getSymTable().lookup(this.varName);
-
+            IType type = value.getType();
             if (!value.getType().equals(this.refType)) {
                 throw new StmtException("Variable is not a ref type\n");
             }

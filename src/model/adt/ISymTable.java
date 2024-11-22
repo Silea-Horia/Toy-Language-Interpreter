@@ -2,6 +2,7 @@ package model.adt;
 
 import model.exception.DictionaryException;
 
+import java.util.Map;
 import java.util.Set;
 
 public interface ISymTable<K, V> {
@@ -10,4 +11,5 @@ public interface ISymTable<K, V> {
     boolean contains(K k);
     V lookup(K k) throws DictionaryException;
     Set<K> keys();
+    Map<K,V> getContent();
 }

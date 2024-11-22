@@ -104,6 +104,15 @@ public class Repository implements IRepository {
                                                                         new PrintStmt(new ReadHeapExp(new VarExp("v")))))))))));
     }
 
+    private void generateState6() {
+        this.initialStatement =  new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                        new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                new CompStmt(new NewStmt("a", new VarExp("v")),
+                                        new CompStmt(new NewStmt("v", new ValueExp(new IntValue(30))),
+                                                new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
+    }
+
     @Override
     public void setState(int option) {
         switch (option) {
@@ -112,8 +121,9 @@ public class Repository implements IRepository {
             case 3 -> this.generateState3();
             case 4 -> this.generateState4();
             case 5 -> this.generateState5();
+            case 6 -> this.generateState6();
             default -> this.initialStatement = new NopStmt();
-        };
+        }
         this.stateList.clear();
         this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>(), new Heap()));
     }

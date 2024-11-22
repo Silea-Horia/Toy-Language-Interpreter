@@ -72,4 +72,14 @@ public class Heap implements IHeap {
         this.memory.forEach((a, v) -> str.append(a).append("->").append(v).append("\n"));
         return "Heap:\n" + str;
     }
+
+    @Override
+    public Map<Integer, IValue> getContent() {
+        return this.memory;
+    }
+
+    @Override
+    public void setContent(Map<Integer, IValue> newContent) {
+        this.memory = newContent;
+    }
 }

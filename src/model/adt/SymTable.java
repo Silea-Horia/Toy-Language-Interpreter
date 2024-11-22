@@ -39,6 +39,11 @@ public class SymTable<K, V> implements ISymTable<K, V> {
     }
 
     @Override
+    public Map<K, V> getContent() {
+        return this.map;
+    }
+
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.map.forEach((k, v) -> str.append(k).append("->").append(v).append("\n"));

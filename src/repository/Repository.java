@@ -3,6 +3,7 @@ package repository;
 import model.adt.*;
 import model.exception.RepoException;
 import model.expression.ArithExp;
+import model.expression.ReadHeapExp;
 import model.expression.ValueExp;
 import model.expression.VarExp;
 import model.state.PrgState;
@@ -96,7 +97,11 @@ public class Repository implements IRepository {
                 new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
                         new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
                                 new CompStmt(new NewStmt("a", new VarExp("v")),
-                                        new CompStmt(new PrintStmt(new VarExp("v")), new PrintStmt(new VarExp("a")))))));
+                                        new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                                new CompStmt(new PrintStmt(new ArithExp(new ReadHeapExp(new ReadHeapExp(new VarExp("a"))), new ValueExp(new IntValue(5)), '+')),
+                                                        new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                                                new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))),
+                                                                        new PrintStmt(new ReadHeapExp(new VarExp("v")))))))))));
     }
 
     @Override

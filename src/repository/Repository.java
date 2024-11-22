@@ -2,10 +2,7 @@ package repository;
 
 import model.adt.*;
 import model.exception.RepoException;
-import model.expression.ArithExp;
-import model.expression.ReadHeapExp;
-import model.expression.ValueExp;
-import model.expression.VarExp;
+import model.expression.*;
 import model.state.PrgState;
 import model.statement.*;
 import model.type.BoolType;
@@ -15,10 +12,13 @@ import model.type.StringType;
 import model.value.BoolValue;
 import model.value.IntValue;
 import model.value.StringValue;
+import model.expression.RelationalOperation;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static model.expression.RelationalOperation.GREATER;
 
 public class Repository implements IRepository {
     private List<PrgState> stateList;
@@ -113,6 +113,14 @@ public class Repository implements IRepository {
                                                 new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
     }
 
+    private void generateState7() {
+        this.initialStatement =  new CompStmt(new VarDeclStmt("v", new IntType()),
+                new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(4))),
+                        new CompStmt(new WhileStmt(new RelationalExp(new VarExp("v"), new ValueExp(new IntValue(0)), GREATER),
+                                new AssignStmt("v", new ArithExp(new VarExp("v"), new ValueExp(new IntValue(1)), '-'))),
+                                new PrintStmt(new VarExp("v")))));
+    }
+
     @Override
     public void setState(int option) {
         switch (option) {
@@ -122,6 +130,7 @@ public class Repository implements IRepository {
             case 4 -> this.generateState4();
             case 5 -> this.generateState5();
             case 6 -> this.generateState6();
+            case 7 -> this.generateState7();
             default -> this.initialStatement = new NopStmt();
         }
         this.stateList.clear();

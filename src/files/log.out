@@ -1,6 +1,11 @@
 PrgState is:
 ExeStack:
-(Declare variable with type: int, id=v; (v=4; (WhileStmt(v>0) v=v-1; print(v))))
+Declare variable with type: Ref (int), id=v
+new(v, 20)
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
 Out:
 FileTable:
@@ -8,8 +13,12 @@ Heap:
 
 PrgState is:
 ExeStack:
-Declare variable with type: int, id=v
-(v=4; (WhileStmt(v>0) v=v-1; print(v)))
+Declare variable with type: Ref (int), id=v
+new(v, 20)
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
 Out:
 FileTable:
@@ -17,141 +26,131 @@ Heap:
 
 PrgState is:
 ExeStack:
-(v=4; (WhileStmt(v>0) v=v-1; print(v)))
+new(v, 20)
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->0
+v->(0, int)
 Out:
 FileTable:
 Heap:
 
 PrgState is:
 ExeStack:
-v=4
-(WhileStmt(v>0) v=v-1; print(v))
+new(v, 20)
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->0
+v->(0, int)
 Out:
 FileTable:
 Heap:
 
 PrgState is:
 ExeStack:
-(WhileStmt(v>0) v=v-1; print(v))
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->4
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
 
 PrgState is:
 ExeStack:
-WhileStmt(v>0) v=v-1
-print(v)
+Declare variable with type: Ref (Ref (int)), id=a
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->4
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
 
 PrgState is:
 ExeStack:
-v=v-1
-WhileStmt(v>0) v=v-1
-print(v)
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->4
+a->(0, Ref (int))
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
 
 PrgState is:
 ExeStack:
-WhileStmt(v>0) v=v-1
-print(v)
+new(a, v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->3
+a->(0, Ref (int))
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
 
 PrgState is:
 ExeStack:
-v=v-1
-WhileStmt(v>0) v=v-1
-print(v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->3
+a->(2, Ref (int))
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
+2->(1, int)
 
 PrgState is:
 ExeStack:
-WhileStmt(v>0) v=v-1
-print(v)
+new(v, 30)
+print(rH(rH(a)))
 SymTable:
-v->2
+a->(2, Ref (int))
+v->(1, int)
 Out:
 FileTable:
 Heap:
+1->20
+2->(1, int)
 
 PrgState is:
 ExeStack:
-v=v-1
-WhileStmt(v>0) v=v-1
-print(v)
+print(rH(rH(a)))
 SymTable:
-v->2
+a->(2, Ref (int))
+v->(3, int)
 Out:
 FileTable:
 Heap:
-
-PrgState is:
-ExeStack:
-WhileStmt(v>0) v=v-1
-print(v)
-SymTable:
-v->1
-Out:
-FileTable:
-Heap:
-
-PrgState is:
-ExeStack:
-v=v-1
-WhileStmt(v>0) v=v-1
-print(v)
-SymTable:
-v->1
-Out:
-FileTable:
-Heap:
-
-PrgState is:
-ExeStack:
-WhileStmt(v>0) v=v-1
-print(v)
-SymTable:
-v->0
-Out:
-FileTable:
-Heap:
-
-PrgState is:
-ExeStack:
-print(v)
-SymTable:
-v->0
-Out:
-FileTable:
-Heap:
+1->20
+2->(1, int)
+3->30
 
 PrgState is:
 ExeStack:
 SymTable:
-v->0
+a->(2, Ref (int))
+v->(3, int)
 Out:
-0
+20
 FileTable:
 Heap:
+1->20
+2->(1, int)
+3->30
 

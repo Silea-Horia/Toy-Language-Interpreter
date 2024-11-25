@@ -2,16 +2,15 @@ package controller;
 
 import model.adt.IExeStack;
 import model.adt.IHeap;
-import model.exception.ControllerException;
-import model.exception.RepoException;
-import model.exception.StackException;
-import model.exception.StmtException;
+import model.exception.*;
 import model.state.PrgState;
 import model.statement.IStmt;
 import model.value.IValue;
 import model.value.RefValue;
 import repository.IRepository;
 
+import java.sql.Ref;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +72,7 @@ public class Controller {
             if (this.displayFlag) {
                 //System.out.println(prgState);
                 try {
-                    prgState.getHeap().setContent(unsafeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values()), prgState.getHeap().getContent()));
+                    prgState.getHeap().setContent(unsafeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(), prgState.getHeap()), prgState.getHeap().getContent()));
                     this.repository.logPrgState();
                 } catch (RepoException re) {
                     throw new ControllerException(re.getMessage());
@@ -88,7 +87,32 @@ public class Controller {
         return heap.entrySet().stream().filter(e->symTableAddr.contains(e.getKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private List<Integer> getAddrFromSymTable(Collection<IValue> symTableValues) {
-        return symTableValues.stream().filter(v->v instanceof RefValue).map(v->{RefValue v1 = (RefValue) v; return v1.getAddress();}).collect(Collectors.toList());
+    private List<Integer> getAddrFromSymTable(Collection<IValue> symTableValues, IHeap heap) {
+//        return symTableValues.stream().filter(v->v instanceof RefValue)
+//                .map(v->{RefValue v1 = (RefValue) v; return v1.getAddress();})
+//                .collect(Collectors.toList());
+        return symTableValues.stream()
+                .filter(v -> v instanceof RefValue)
+                .map(v -> (RefValue)v)
+                .flatMap(
+                        v->{
+                            List<Integer> addresses = new ArrayList<>();
+                            while (true) {
+                                if (v.getAddress() == 0) {
+                                    break;
+                                }
+                                addresses.add(v.getAddress());
+                                try {
+                                    IValue next = heap.getValue(v.getAddress());
+                                    if (next instanceof RefValue) {
+                                        v = (RefValue) next;
+                                    } else break;
+                                } catch (DictionaryException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            return addresses.stream();
+                        }
+                ).collect(Collectors.toList());
     }
 }

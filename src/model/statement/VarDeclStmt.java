@@ -25,7 +25,7 @@ public class VarDeclStmt implements IStmt {
         ISymTable<String, IValue> tbl = state.getSymTable();
         if (tbl.contains(this.id)) throw new StmtException("Variable is already declared!\n");
         tbl.insert(this.id, this.type.getDefaultValue());
-        return state;
+        return null;
     }
 
     @Override

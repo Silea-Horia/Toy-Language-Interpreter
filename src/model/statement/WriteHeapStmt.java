@@ -45,7 +45,7 @@ public class WriteHeapStmt implements IStmt {
 
             state.getHeap().set(address, res);
 
-            return state;
+            return null;
         } catch (DictionaryException | ExpressionException e) {
             throw new StmtException(e.getMessage());
         }

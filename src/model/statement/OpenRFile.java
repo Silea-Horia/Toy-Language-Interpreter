@@ -41,7 +41,7 @@ public class OpenRFile implements IStmt {
 
                 state.getFileTable().insert((StringValue)result, br);
 
-                return state;
+                return null;
             } catch (FileNotFoundException e) {
                 throw new StmtException("File not found\n");
             }

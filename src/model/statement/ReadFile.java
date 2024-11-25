@@ -57,7 +57,7 @@ public class ReadFile implements IStmt {
                     newValue = new IntValue(Integer.parseInt(readVal));
                 }
                 symTable.insert(this.varName, newValue);
-                return state;
+                return null;
             } catch (IOException e) {
                 throw new StmtException(e.getMessage());
             }

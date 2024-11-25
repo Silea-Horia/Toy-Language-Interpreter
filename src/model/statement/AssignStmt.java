@@ -49,7 +49,7 @@ public class AssignStmt implements IStmt {
         } else {
             throw new StmtException("The used variable " + this.id + " was not declared before usage!\n");
         }
-        return state;
+        return null;
     }
 
     @Override

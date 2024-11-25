@@ -13,7 +13,7 @@ public class View {
     }
 
     private void getSetOption() {
-        System.out.println("Choose a program predefined program(1,2,3,4): ");
+        System.out.println("Choose a program predefined program(1,2,3,4,5,6,7): ");
         Scanner input = new Scanner(System.in);
         int opt = input.nextInt();
         this.controller.generateInitialState(opt);

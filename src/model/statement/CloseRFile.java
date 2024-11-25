@@ -33,7 +33,7 @@ public class CloseRFile implements IStmt {
             try (BufferedReader br = state.getFileTable().lookup((StringValue) eval)){
                 br.close();
                 state.getFileTable().remove((StringValue) eval);
-                return state;
+                return null;
             }
         } catch (ExpressionException | DictionaryException | IOException e) {
             throw new StmtException(e.getMessage());

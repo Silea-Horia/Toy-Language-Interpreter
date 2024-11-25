@@ -22,7 +22,7 @@ public class PrintStmt implements IStmt {
         } catch (ExpressionException e) {
             throw new StmtException(e.getMessage());
         }
-        return state;
+        return null;
     }
 
     @Override

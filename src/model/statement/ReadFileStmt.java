@@ -53,7 +53,7 @@ public class ReadFileStmt implements IStmt {
         } catch (DictionaryException e) {
             throw new StmtException(e.getMessage());
         }
-        return state;
+        return null;
     }
 
     @Override

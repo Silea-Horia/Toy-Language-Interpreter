@@ -33,7 +33,7 @@ public class WhileStmt implements IStmt {
                 state.getExeStack().push(this.command);
             }
 
-            return state;
+            return null;
         } catch (ExpressionException e) {
             throw new StmtException(e.getMessage());
         }

@@ -35,14 +35,14 @@ public class NewStmt implements IStmt {
             IValue res = this.exp.eval(state.getSymTable(), state.getHeap());
 
             if (!refValue.getLocationType().equals(res.getType())) {
-                throw new StmtException("The expression type is different from the reference type\n");
+                throw new StmtException("The expression type is different from the reference type😅\n");
             }
 
             int address = state.getHeap().allocate(res);
 
             state.getSymTable().insert(this.varName, new RefValue(address, refValue.getLocationType()));
 
-            return state;
+            return null;
         } catch (DictionaryException | ExpressionException e) {
             throw new StmtException(e.getMessage());
         }

@@ -18,7 +18,7 @@ public class CompStmt implements IStmt {
         IExeStack<IStmt> stack = state.getExeStack();
         stack.push(this.second);
         stack.push(this.first);
-        return state;
+        return null;
     }
 
     @Override

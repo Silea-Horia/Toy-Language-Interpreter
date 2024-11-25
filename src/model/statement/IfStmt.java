@@ -39,7 +39,7 @@ public class IfStmt implements IStmt {
         if (!cond.getType().equals(boolType)) throw new StmtException("Conditional expression is not a boolean!|n");
         if (((BoolValue)cond).getValue()) stack.push(this.thenS);
         else stack.push(this.elseS);
-        return state;
+        return null;
     }
     @Override
     public IStmt deepCopy() {

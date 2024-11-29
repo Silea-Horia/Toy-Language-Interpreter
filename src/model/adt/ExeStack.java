@@ -34,7 +34,7 @@ public class ExeStack<T> implements IExeStack<T> {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        this.stack.forEach((t) -> str.append(t).append("\n"));
+        this.stack.forEach((t) -> str.append(t).append(";\n"));
         return "ExeStack:\n" + str;
     }
 }

@@ -9,7 +9,6 @@ import model.value.IValue;
 import model.value.RefValue;
 import repository.IRepository;
 
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -72,7 +71,8 @@ public class Controller {
             if (this.displayFlag) {
                 //System.out.println(prgState);
                 try {
-                    prgState.getHeap().setContent(unsafeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(), prgState.getHeap()), prgState.getHeap().getContent()));
+                    prgState.getHeap().setContent(
+                            safeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(), prgState.getHeap()), prgState.getHeap().getContent()));
                     this.repository.logPrgState();
                 } catch (RepoException re) {
                     throw new ControllerException(re.getMessage());
@@ -82,7 +82,7 @@ public class Controller {
         }
     }
 
-    private Map<Integer, IValue> unsafeGarbageCollector(List<Integer> symTableAddr, Map<Integer, IValue> heap) {
+    private Map<Integer, IValue> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, IValue> heap) {
         return heap.entrySet().stream().filter(e->symTableAddr.contains(e.getKey())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 

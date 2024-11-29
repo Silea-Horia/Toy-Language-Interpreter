@@ -110,7 +110,8 @@ public class Repository implements IRepository {
                         new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
                                 new CompStmt(new NewStmt("a", new VarExp("v")),
                                         new CompStmt(new NewStmt("v", new ValueExp(new IntValue(30))),
-                                                new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
+                                                new CompStmt(new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))),
+                                                        new NewStmt("v", new ValueExp(new IntValue(50)))))))));
     }
 
     private void generateState7() {

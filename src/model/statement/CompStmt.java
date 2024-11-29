@@ -23,7 +23,7 @@ public class CompStmt implements IStmt {
 
     @Override
     public String toString() {
-        return this.first + "\n" + this.second;
+        return this.first + ";\n" + this.second;
     }
 
     @Override

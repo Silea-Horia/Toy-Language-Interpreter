@@ -39,24 +39,29 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public PrgState getCrtState() {
-        return this.stateList.get(this.currentProgramState);
-    }
-
-    @Override
     public void addPrgState(PrgState state) {
         this.stateList.add(state);
     }
 
     @Override
-    public void logPrgState() throws RepoException {
+    public void logPrgState(PrgState state) throws RepoException {
         try {
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(this.logFilePath, true)));
-            pw.println(this.getCrtState());
+            pw.println(state);
             pw.close();
         } catch (IOException ex) {
             throw new RepoException(ex.getMessage());
         }
+    }
+
+    @Override
+    public List<PrgState> getPrgList() {
+        return this.stateList;
+    }
+
+    @Override
+    public void setPrgList(List<PrgState> newList) {
+        this.stateList = newList;
     }
 
     private void generateState1() {

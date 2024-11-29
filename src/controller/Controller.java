@@ -41,20 +41,6 @@ public class Controller {
         this.repository.setState(option);
     }
 
-    public PrgState oneStep(PrgState prgState) throws ControllerException {
-        IExeStack<IStmt> stack = prgState.getExeStack();
-        try {
-            IStmt crtStmt = stack.pop();
-            try {
-                return crtStmt.execute(prgState);
-            } catch (StmtException e) {
-                throw new ControllerException(e.getMessage());
-            }
-        } catch (StackException e) {
-            throw new ControllerException("Execution stack is empty!\n");
-        }
-    }
-
     public void allStep() throws ControllerException {
         PrgState prgState = this.repository.getCrtState();
         if (this.displayFlag) {

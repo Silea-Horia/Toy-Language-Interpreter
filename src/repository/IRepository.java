@@ -6,7 +6,6 @@ import model.state.PrgState;
 import java.util.List;
 
 public interface IRepository {
-    PrgState getCrtState();
     void addPrgState(PrgState state);
     void logPrgState(PrgState state) throws RepoException;
     void setState(int option);

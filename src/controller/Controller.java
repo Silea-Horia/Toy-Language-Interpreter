@@ -9,15 +9,17 @@ import model.value.IValue;
 import model.value.RefValue;
 import repository.IRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class Controller {
     private IRepository repository;
     private boolean displayFlag;
+    private ExecutorService executor;
 
     public Controller(IRepository repository) {
         this.repository = repository;
@@ -42,7 +44,21 @@ public class Controller {
     }
 
     public void allStep() throws ControllerException {
-        PrgState prgState = this.repository.getCrtState();
+        this.executor = Executors.newFixedThreadPool(2);
+
+        List<PrgState> prgStateList = this.removeCompletedPrg(this.repository.getPrgList());
+
+        while (!prgStateList.isEmpty()) {
+            this.oneStepForAll(prgStateList);
+            // call garbage collector here
+            prgStateList = this.removeCompletedPrg(this.repository.getPrgList());
+        }
+
+        this.executor.shutdownNow();
+
+        this.repository.setPrgList(prgStateList);
+
+        /*PrgState prgState = this.repository.getCrtState();
         if (this.displayFlag) {
             //System.out.println(prgState);
             try {
@@ -65,7 +81,7 @@ public class Controller {
                 }
 
             }
-        }
+        }*/
     }
 
     private Map<Integer, IValue> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer, IValue> heap) {
@@ -99,5 +115,45 @@ public class Controller {
                             return addresses.stream();
                         }
                 ).collect(Collectors.toList());
+    }
+
+    private List<PrgState> removeCompletedPrg(List<PrgState> prgStateList) {
+        return prgStateList.stream().filter(PrgState::isNotCompleted).collect(Collectors.toList());
+    }
+
+    public void oneStepForAll(List<PrgState> prgStateList) throws ControllerException {
+        prgStateList.forEach(prg -> {
+            try {
+                this.repository.logPrgState(prg);
+            } catch (RepoException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+        });
+
+        List<Callable<PrgState>> callList = prgStateList.stream().map((PrgState p) -> (Callable<PrgState>)(p::oneStep)).toList();
+
+        try {
+            List<PrgState> newPrgList = this.executor.invokeAll(callList).stream().map(future -> {try {return future.get();} catch (
+                    InterruptedException | ExecutionException re) { System.out.println(re.getMessage()); System.exit(1);} return null;}).filter(Objects::nonNull).toList();
+
+            prgStateList.addAll(newPrgList);
+
+            prgStateList.forEach(prg -> {
+                try {
+                    this.repository.logPrgState(prg);
+                } catch (RepoException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
+                }
+            });
+
+            this.repository.setPrgList(newPrgList);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+
     }
 }

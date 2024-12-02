@@ -1,10 +1,8 @@
 package controller;
 
-import model.adt.IExeStack;
 import model.adt.IHeap;
 import model.exception.*;
 import model.state.PrgState;
-import model.statement.IStmt;
 import model.value.IValue;
 import model.value.RefValue;
 import repository.IRepository;
@@ -43,14 +41,31 @@ public class Controller {
         this.repository.setState(option);
     }
 
+    private void printAll(List<PrgState> prgStateList) {
+        prgStateList.forEach(prg -> {
+            try {
+                this.repository.logPrgState(prg);
+            } catch (RepoException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+        });
+    }
+
     public void allStep() throws ControllerException {
         this.executor = Executors.newFixedThreadPool(2);
 
         List<PrgState> prgStateList = this.removeCompletedPrg(this.repository.getPrgList());
-
+        this.printAll(prgStateList);
         while (!prgStateList.isEmpty()) {
             this.oneStepForAll(prgStateList);
-            // call garbage collector here
+
+            prgStateList.forEach( prgState ->
+                    prgState.getHeap().setContent(
+                            safeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(),
+                                    prgState.getHeap()), prgState.getHeap().getContent())));
+
+            this.printAll(prgStateList);
             prgStateList = this.removeCompletedPrg(this.repository.getPrgList());
         }
 
@@ -122,14 +137,7 @@ public class Controller {
     }
 
     public void oneStepForAll(List<PrgState> prgStateList) throws ControllerException {
-        prgStateList.forEach(prg -> {
-            try {
-                this.repository.logPrgState(prg);
-            } catch (RepoException e) {
-                System.out.println(e.getMessage());
-                System.exit(1);
-            }
-        });
+
 
         List<Callable<PrgState>> callList = prgStateList.stream().map((PrgState p) -> (Callable<PrgState>)(p::oneStep)).toList();
 
@@ -139,16 +147,9 @@ public class Controller {
 
             prgStateList.addAll(newPrgList);
 
-            prgStateList.forEach(prg -> {
-                try {
-                    this.repository.logPrgState(prg);
-                } catch (RepoException e) {
-                    System.out.println(e.getMessage());
-                    System.exit(1);
-                }
-            });
+            //this.printAll(prgStateList);
 
-            this.repository.setPrgList(newPrgList);
+            this.repository.setPrgList(prgStateList);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             System.exit(1);

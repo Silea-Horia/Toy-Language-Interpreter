@@ -4,6 +4,7 @@ import model.adt.*;
 import model.exception.StackException;
 import model.exception.StateException;
 import model.exception.StmtException;
+import model.statement.CompStmt;
 import model.statement.IStmt;
 import model.value.IValue;
 import model.value.StringValue;
@@ -26,13 +27,37 @@ public class PrgState {
         this.out = out;
         this.originalProgram = originalProgram.deepCopy();
         this.heap = heap;
-        this.exeStack.push(originalProgram);
+        //this.exeStack.push(originalProgram);
+        this.convertToStack(originalProgram);
         this.fileTable = fileTable;
         this.setId();
     }
 
     private synchronized void setId() {
         this.id = lastId++;
+    }
+
+    private void convertToStack(IStmt stmt) {
+        IStmt first, second;
+
+        if (stmt.toString().contains(";")) {
+            first = ((CompStmt)stmt).getFirst();
+            second = ((CompStmt)stmt).getSecond();
+
+            if (second.toString().contains(";")) {
+                this.convertToStack(second);
+            } else {
+                this.exeStack.push(second);
+            }
+
+            if (first.toString().contains(";")) {
+                this.convertToStack(first);
+            } else {
+                this.exeStack.push(first);
+            }
+        } else {
+            this.exeStack.push(stmt);
+        }
     }
 
     public IExeStack<IStmt> getExeStack() { return this.exeStack; }

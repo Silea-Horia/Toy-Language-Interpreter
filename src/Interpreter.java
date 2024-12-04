@@ -16,7 +16,7 @@ public class Interpreter {
         TextMenu menu = new TextMenu();
 
         menu.addCommand(new ExitCommand("0", "exit"));
-        menu.addCommand(new GetPrgCommand("1", "get predefined program(1,2,3,4,5,6,7)", controller));
+        menu.addCommand(new GetPrgCommand("1", "get predefined program(1,2,3,4,5,6,7,8)", controller));
         menu.addCommand(new RunExampleCommand("2", "run program", controller));
 
         menu.show();

@@ -58,6 +58,6 @@ public class WriteHeapStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "WriteHeapStmt{}";
+        return "wh(" + this.varName + ", " + this.exp + ")";
     }
 }

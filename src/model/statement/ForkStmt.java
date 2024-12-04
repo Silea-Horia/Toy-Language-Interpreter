@@ -23,4 +23,9 @@ public class ForkStmt implements IStmt {
     public IStmt deepCopy() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Fork(" + this.stmt + ')';
+    }
 }

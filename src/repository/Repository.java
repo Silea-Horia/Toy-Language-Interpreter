@@ -127,6 +127,29 @@ public class Repository implements IRepository {
                                 new PrintStmt(new VarExp("v")))));
     }
 
+    private void generateState8() {
+        this.initialStatement = new CompStmt(
+          new VarDeclStmt("v", new IntType()), new CompStmt(
+                  new VarDeclStmt("a", new RefType(new IntType())), new CompStmt(
+                          new AssignStmt("v", new ValueExp(new IntValue(10))), new CompStmt(
+                                  new NewStmt("a", new ValueExp(new IntValue(22))), new CompStmt(
+                                          new ForkStmt(new CompStmt(
+                                                  new WriteHeapStmt("a", new ValueExp(new IntValue(30))), new CompStmt(
+                                                          new AssignStmt("v", new ValueExp(new IntValue(32))), new CompStmt(
+                                                                  new PrintStmt(new VarExp("v")),
+                                                                    new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                          )
+                                          )
+                                          )), new CompStmt(
+                                                  new PrintStmt(new VarExp("v")), new PrintStmt(new ReadHeapExp(new VarExp("a")))
+                                            )
+                                )
+                        )
+                )
+            )
+        );
+    }
+
     @Override
     public void setState(int option) {
         switch (option) {
@@ -137,6 +160,7 @@ public class Repository implements IRepository {
             case 5 -> this.generateState5();
             case 6 -> this.generateState6();
             case 7 -> this.generateState7();
+            case 8 -> this.generateState8();
             default -> this.initialStatement = new NopStmt();
         }
         this.stateList.clear();

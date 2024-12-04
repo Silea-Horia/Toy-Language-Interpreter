@@ -40,7 +40,7 @@ public class PrgState {
     private void convertToStack(IStmt stmt) {
         IStmt first, second;
 
-        if (stmt.toString().contains(";")) {
+        if (stmt.toString().startsWith("comp")) {
             first = ((CompStmt)stmt).getFirst();
             second = ((CompStmt)stmt).getSecond();
 

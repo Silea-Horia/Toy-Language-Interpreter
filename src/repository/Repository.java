@@ -12,10 +12,8 @@ import model.type.StringType;
 import model.value.BoolValue;
 import model.value.IntValue;
 import model.value.StringValue;
-import model.expression.RelationalOperation;
 
 import java.io.*;
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +22,11 @@ import static model.expression.RelationalOperation.GREATER;
 public class Repository implements IRepository {
     private List<PrgState> stateList;
     private String logFilePath;
-    private int  currentProgramState;
     private IStmt initialStatement;
 
     public Repository(String logFilePath) {
         this.stateList = new ArrayList<>();
         this.logFilePath = logFilePath;
-        this.currentProgramState = 0;
 
         try {
             PrintWriter writer = new PrintWriter(logFilePath);

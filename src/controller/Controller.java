@@ -57,11 +57,17 @@ public class Controller {
         while (!prgStateList.isEmpty()) {
 
             this.oneStepForAll(prgStateList);
+//            prgStateList.forEach( prgState ->
+//                    prgState.getHeap().setContent(
+//                            safeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(),
+//                                    prgState.getHeap()), prgState.getHeap().getContent())));
 
-            prgStateList.forEach( prgState ->
-                    prgState.getHeap().setContent(
-                            safeGarbageCollector(getAddrFromSymTable(prgState.getSymTable().getContent().values(),
-                                    prgState.getHeap()), prgState.getHeap().getContent())));
+            ArrayList<Integer> addresses = new ArrayList<>();
+            prgStateList.stream().map(prgState -> getAddrFromSymTable(prgState.getSymTable().getContent().values(),
+                    prgState.getHeap())).forEach(addresses::addAll);
+            //System.out.println(addresses);
+
+            prgStateList.forEach(prgState -> prgState.getHeap().setContent(safeGarbageCollector(addresses, prgState.getHeap().getContent())));
 
             this.logAll(prgStateList);
 

@@ -44,6 +44,13 @@ public class SymTable<K, V> implements ISymTable<K, V> {
     }
 
     @Override
+    public ISymTable<K, V> deepCopy() {
+        SymTable<K, V> newTable = new SymTable<>();
+        this.map.forEach(newTable::insert);
+        return newTable;
+    }
+
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         this.map.forEach((k, v) -> str.append(k).append("->").append(v).append("\n"));

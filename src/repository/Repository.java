@@ -15,6 +15,7 @@ import model.value.StringValue;
 import model.expression.RelationalOperation;
 
 import java.io.*;
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,13 +141,38 @@ public class Repository implements IRepository {
                                                                     new PrintStmt(new ReadHeapExp(new VarExp("a")))
                                           )
                                           )
-                                          )), new CompStmt(
+                                          )
+                                          ), new CompStmt(
                                                   new PrintStmt(new VarExp("v")), new PrintStmt(new ReadHeapExp(new VarExp("a")))
                                             )
                                 )
                         )
                 )
             )
+        );
+    }
+
+    private void generateState9() {
+        // Ref inv v; new(v, 20); Ref Ref int a; new(a, v); fork(Ref int b; new(v,30); new(b,v););
+        this.initialStatement = new CompStmt(
+          new VarDeclStmt("v", new RefType(new IntType())), new CompStmt(
+                  new NewStmt("v", new ValueExp(new IntValue(20))), new CompStmt(
+                          new VarDeclStmt("a", new RefType(new RefType(new IntType()))), new CompStmt(
+                                  new NewStmt("a", new VarExp("v")), new CompStmt(
+                                      new ForkStmt(
+                                              new CompStmt(
+                                                      new VarDeclStmt("b", new RefType(new RefType(new IntType()))), new CompStmt(
+                                                        new NewStmt("v", new ValueExp(new IntValue(30))),
+                                                        new NewStmt("b", new VarExp("v"))
+                                              )
+                                              )
+                                      ), new CompStmt(
+                                              new PrintStmt(new ReadHeapExp(new VarExp("v"))), new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a"))))
+        )
+        )
+        )
+        )
+        )
         );
     }
 
@@ -161,6 +187,7 @@ public class Repository implements IRepository {
             case 6 -> this.generateState6();
             case 7 -> this.generateState7();
             case 8 -> this.generateState8();
+            case 9 -> this.generateState9();
             default -> this.initialStatement = new NopStmt();
         }
         this.stateList.clear();

@@ -2,6 +2,7 @@ package repository;
 
 import model.adt.*;
 import model.exception.RepoException;
+import model.exception.StmtException;
 import model.expression.*;
 import model.state.PrgState;
 import model.statement.*;
@@ -173,7 +174,7 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public void setState(int option) {
+    public void setState(int option) throws RepoException{
         switch (option) {
             case 1 -> this.generateState1();
             case 2 -> this.generateState2();
@@ -185,6 +186,11 @@ public class Repository implements IRepository {
             case 8 -> this.generateState8();
             case 9 -> this.generateState9();
             default -> this.initialStatement = new NopStmt();
+        }
+        try {
+            this.initialStatement.typeCheck(new Dictionary<>());
+        } catch (StmtException e) {
+            throw new RepoException(e.getMessage());
         }
         this.stateList.clear();
         this.stateList.add(new PrgState(new ExeStack<>(), new SymTable<>(), new Out<>(), this.initialStatement, new FileTable<>(), new Heap()));

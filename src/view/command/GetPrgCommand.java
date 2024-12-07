@@ -1,6 +1,7 @@
 package view.command;
 
 import controller.Controller;
+import model.exception.ControllerException;
 
 import java.util.Scanner;
 
@@ -17,6 +18,11 @@ public class GetPrgCommand extends Command {
     public void execute() {
         Scanner input = new Scanner(System.in);
         int opt = input.nextInt();
-        this.controller.generateInitialState(opt);
+        try {
+            this.controller.generateInitialState(opt);
+        } catch (ControllerException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
     }
 }

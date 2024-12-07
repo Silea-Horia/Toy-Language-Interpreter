@@ -61,7 +61,7 @@ public class AssignStmt implements IStmt {
     @Override
     public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
         try {
-            if (typeEnv.lookup(this.id) == this.exp.typeCheck(typeEnv)) {
+            if (typeEnv.lookup(this.id).equals(this.exp.typeCheck(typeEnv))) {
                 return typeEnv;
             }
             throw new StmtException("RHS and LHS have different types.\n");

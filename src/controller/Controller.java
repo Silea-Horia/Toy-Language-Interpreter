@@ -32,8 +32,12 @@ public class Controller {
         return this.displayFlag;
     }
 
-    public void generateInitialState(int option) {
-        this.repository.setState(option);
+    public void generateInitialState(int option) throws ControllerException {
+        try {
+            this.repository.setState(option);
+        } catch (RepoException e) {
+            throw new ControllerException(e.getMessage());
+        }
     }
 
     private void logAll(List<PrgState> prgStateList) {

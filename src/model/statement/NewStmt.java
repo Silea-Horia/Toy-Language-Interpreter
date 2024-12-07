@@ -1,5 +1,6 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
@@ -52,6 +53,20 @@ public class NewStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new NewStmt(this.varName, this.exp.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            IType varType = typeEnv.lookup(this.varName);
+            IType expType = this.exp.typeCheck(typeEnv);
+            if (varType.equals(new RefType(expType))) {
+                return typeEnv;
+            }
+            throw new StmtException("RHS and LHS of NEW don't match types.\n");
+        } catch (DictionaryException | ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
     }
 
     @Override

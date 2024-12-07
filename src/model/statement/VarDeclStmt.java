@@ -1,5 +1,6 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.adt.ISymTable;
 import model.exception.StmtException;
 import model.state.PrgState;
@@ -31,5 +32,11 @@ public class VarDeclStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new VarDeclStmt(this.id, this.type);
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        typeEnv.insert(this.id, this.type);
+        return typeEnv;
     }
 }

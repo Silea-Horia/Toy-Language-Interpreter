@@ -12,6 +12,6 @@ public interface IDictionary<K, V> {
     V lookup(K k) throws DictionaryException;
     Set<K> keys();
     Map<K,V> getContent();
-    ISymTable<K, V> deepCopy();
+    IDictionary<K, V> deepCopy();
 }
 

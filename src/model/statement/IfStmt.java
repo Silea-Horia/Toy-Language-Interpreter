@@ -1,11 +1,13 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.adt.IExeStack;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
 import model.type.BoolType;
+import model.type.IType;
 import model.value.BoolValue;
 import model.value.IValue;
 
@@ -44,5 +46,19 @@ public class IfStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new IfStmt(this.exp.deepCopy(), this.thenS.deepCopy(), this.elseS.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            if (this.exp.typeCheck(typeEnv).equals(boolType)) {
+                this.thenS.typeCheck(typeEnv.deepCopy());
+                this.elseS.typeCheck(typeEnv.deepCopy());
+                return typeEnv;
+            }
+            throw new StmtException("The if condition is not a boolean.\n");
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
     }
 }

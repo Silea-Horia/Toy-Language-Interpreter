@@ -1,9 +1,11 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
+import model.type.IType;
 import model.type.StringType;
 import model.value.IValue;
 import model.value.StringValue;
@@ -53,6 +55,18 @@ public class OpenRFile implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new OpenRFile(exp.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            if (this.exp.typeCheck(typeEnv).equals(stringType)) {
+                return typeEnv;
+            }
+            throw new StmtException("Expression is not a String.\n");
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
     }
 
     @Override

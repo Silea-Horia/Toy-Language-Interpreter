@@ -1,8 +1,10 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.adt.IExeStack;
 import model.exception.StmtException;
 import model.state.PrgState;
+import model.type.IType;
 
 public class CompStmt implements IStmt {
     private IStmt first;
@@ -37,5 +39,10 @@ public class CompStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new CompStmt(this.first.deepCopy(), this.second.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        return this.second.typeCheck(this.first.typeCheck(typeEnv));
     }
 }

@@ -1,10 +1,12 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.adt.IOutList;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
+import model.type.IType;
 import model.value.IValue;
 
 public class PrintStmt implements IStmt {
@@ -33,5 +35,15 @@ public class PrintStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new PrintStmt(this.exp.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            this.exp.typeCheck(typeEnv);
+        } catch (ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
+        return typeEnv;
     }
 }

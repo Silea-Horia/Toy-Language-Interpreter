@@ -1,10 +1,12 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
 import model.exception.StmtException;
 import model.expression.IExp;
 import model.state.PrgState;
+import model.type.IType;
 import model.type.RefType;
 import model.value.IValue;
 import model.value.RefValue;
@@ -54,6 +56,21 @@ public class WriteHeapStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new WriteHeapStmt(this.varName, this.exp.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            IType expType = this.exp.typeCheck(typeEnv);
+            IType varType = typeEnv.lookup(this.varName);
+
+            if (varType.equals(new RefType(expType))) {
+                return typeEnv;
+            }
+            throw new StmtException("LHS and RHS of WH are not of the same type.\n");
+        } catch (ExpressionException | DictionaryException e) {
+            throw new StmtException(e.getMessage());
+        }
     }
 
     @Override

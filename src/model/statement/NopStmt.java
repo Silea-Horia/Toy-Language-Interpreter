@@ -1,7 +1,9 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.exception.StmtException;
 import model.state.PrgState;
+import model.type.IType;
 
 public class NopStmt implements IStmt {
 
@@ -18,5 +20,10 @@ public class NopStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new NopStmt();
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        return typeEnv;
     }
 }

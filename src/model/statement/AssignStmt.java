@@ -1,5 +1,6 @@
 package model.statement;
 
+import model.adt.IDictionary;
 import model.adt.ISymTable;
 import model.adt.IExeStack;
 import model.exception.DictionaryException;
@@ -55,5 +56,17 @@ public class AssignStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new AssignStmt(this.id, this.exp.deepCopy());
+    }
+
+    @Override
+    public IDictionary<String, IType> typeCheck(IDictionary<String, IType> typeEnv) throws StmtException {
+        try {
+            if (typeEnv.lookup(this.id) == this.exp.typeCheck(typeEnv)) {
+                return typeEnv;
+            }
+            throw new StmtException("RHS and LHS have different types.\n");
+        } catch (DictionaryException | ExpressionException e) {
+            throw new StmtException(e.getMessage());
+        }
     }
 }

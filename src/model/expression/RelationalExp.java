@@ -1,8 +1,11 @@
 package model.expression;
 
+import model.adt.IDictionary;
 import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
+import model.type.BoolType;
+import model.type.IType;
 import model.type.IntType;
 import model.value.BoolValue;
 import model.value.IValue;
@@ -12,11 +15,13 @@ public class RelationalExp implements IExp {
     private IExp left;
     private IExp right;
     private RelationalOperation relation;
+    private IntType intType;
 
     public RelationalExp(IExp left, IExp right, RelationalOperation relation) {
         this.left = left;
         this.right = right;
         this.relation = relation;
+        this.intType = new IntType();
     }
 
     @Override
@@ -24,13 +29,13 @@ public class RelationalExp implements IExp {
         try {
             IValue leftVal = left.eval(tbl, heap);
 
-            if (!leftVal.getType().equals(new IntType())) {
+            if (!leftVal.getType().equals(this.intType)) {
                 throw new ExpressionException("Left operand is not an Int type\n");
             }
 
             IValue rightVal = right.eval(tbl, heap);
 
-            if (!rightVal.getType().equals(new IntType())) {
+            if (!rightVal.getType().equals(this.intType)) {
                 throw new ExpressionException("Right operand is not an Int type\n");
             }
 
@@ -70,6 +75,17 @@ public class RelationalExp implements IExp {
     @Override
     public IExp deepCopy() {
         return new RelationalExp(left.deepCopy(), right.deepCopy(), relation);
+    }
+
+    @Override
+    public IType typeCheck(IDictionary<String, IType> typeEnv) throws ExpressionException {
+        if (this.left.typeCheck(typeEnv).equals(this.intType)) {
+            if (this.right.typeCheck(typeEnv).equals(this.intType)) {
+                return new BoolType();
+            }
+            throw new ExpressionException("Right operand is not an integer\n");
+        }
+        throw new ExpressionException("Left operand is not an integer\n");
     }
 
     @Override

@@ -1,8 +1,10 @@
 package model.expression;
 
+import model.adt.IDictionary;
 import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.ExpressionException;
+import model.type.IType;
 import model.value.IValue;
 
 public class ValueExp implements IExp{
@@ -16,6 +18,11 @@ public class ValueExp implements IExp{
     @Override
     public IExp deepCopy() {
         return new ValueExp(this.e);
+    }
+
+    @Override
+    public IType typeCheck(IDictionary<String, IType> typeEnv) throws ExpressionException {
+        return this.e.getType();
     }
 
     @Override

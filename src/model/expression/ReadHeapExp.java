@@ -1,9 +1,11 @@
 package model.expression;
 
+import model.adt.IDictionary;
 import model.adt.IHeap;
 import model.adt.ISymTable;
 import model.exception.DictionaryException;
 import model.exception.ExpressionException;
+import model.type.IType;
 import model.type.RefType;
 import model.value.IValue;
 import model.value.RefValue;
@@ -39,6 +41,15 @@ public class ReadHeapExp implements IExp {
     @Override
     public IExp deepCopy() {
         return new ReadHeapExp(this.exp.deepCopy());
+    }
+
+    @Override
+    public IType typeCheck(IDictionary<String, IType> typeEnv) throws ExpressionException {
+        IType type;
+        if ((type = this.exp.typeCheck(typeEnv)) instanceof RefType) {
+            return ((RefType)type).getInner();
+        }
+        throw new ExpressionException("The Read Heap argument is not a Ref Type.\n");
     }
 
     @Override

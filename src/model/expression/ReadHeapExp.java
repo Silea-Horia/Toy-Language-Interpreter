@@ -12,18 +12,16 @@ import model.value.RefValue;
 
 public class ReadHeapExp implements IExp {
     private IExp exp;
-    private RefType refType;
 
     public ReadHeapExp(IExp exp) {
         this.exp = exp;
-        this.refType = new RefType(null);
     }
 
     @Override
     public IValue eval(ISymTable<String, IValue> tbl, IHeap heap) throws ExpressionException {
         IValue res = this.exp.eval(tbl, heap);
 
-        if (!res.getType().equals(this.refType)) {
+        if (!(res.getType() instanceof  RefType)) {
             throw new ExpressionException("Expression is not a ref type\n");
         }
 

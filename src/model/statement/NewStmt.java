@@ -19,7 +19,7 @@ public class NewStmt implements IStmt {
     public NewStmt(String varName, IExp exp) {
         this.varName = varName;
         this.exp = exp;
-        this.refType = new RefType(null);
+        //this.refType = new RefType(null);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class NewStmt implements IStmt {
         try {
             IValue value = state.getSymTable().lookup(this.varName);
             IType type = value.getType();
-            if (!value.getType().equals(this.refType)) {
+            if (!value.getType().equals(type)) {
                 throw new StmtException("Variable is not a ref type\n");
             }
 

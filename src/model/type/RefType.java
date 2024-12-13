@@ -12,11 +12,13 @@ public class RefType implements IType {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof RefType;
+//        return obj instanceof RefType;
 //        if (obj instanceof RefType) {
 //            return inner.equals(((RefType) obj).inner);
 //        }
 //        return false;
+
+        return obj instanceof RefType && ((RefType) obj).getInner().equals(this.inner);
     }
 
     @Override
